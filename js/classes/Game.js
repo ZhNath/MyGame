@@ -6,6 +6,8 @@ import Board, {
   Bank,
   Haus,
 } from "./Settings.js";
+import Player from "./Player.js";
+// import InputHandler from "./inputHandler.js";
 
 export default class Game {
   canvas;
@@ -17,8 +19,14 @@ export default class Game {
     this.canvas.height = Board.canvas.height;
     this.ctx = this.canvas.getContext("2d");
     this.drawBoard();
+    this.drawPlayer();
   }
 
+  update() {
+    this.wolf.update();
+  }
+
+  wolf = new Player(this);
   board = new Board();
   drawBoard() {
     this.ctx.fillStyle = Color.background;
@@ -244,5 +252,9 @@ export default class Game {
     };
     haus([Color.shadow, Color.shadow], 4);
     haus(Color.house, 0);
+  }
+
+  drawPlayer() {
+    this.wolf.draw(this.ctx);
   }
 }
