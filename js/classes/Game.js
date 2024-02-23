@@ -6,6 +6,7 @@ export default class Game {
   canvas;
   ctx;
   wolf = new Player(this);
+  wolf1 = new Player(this);
   board = new Board(this);
   inputHandler = new InputHandler(this);
 
