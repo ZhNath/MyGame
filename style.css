@@ -1,0 +1,6 @@
+canvas {
+  position: relative;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: calc(50vh - 200px);
+}
