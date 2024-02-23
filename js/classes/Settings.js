@@ -1,11 +1,7 @@
 import Color, { RadialGradient, LinearGradient } from "./Color.js";
+import Board from "./Board.js";
 
-export default class Board {
-  static canvas = {
-    width: 601,
-    height: 401,
-  };
-
+export default class Settings {
   roundRect(context, start, size, radius, color, fill, lineWidth) {
     context.strokeStyle = color;
     if (fill) context.fillStyle = color;
@@ -161,11 +157,11 @@ export class GreyButton {
     this.context = context;
     this.x = x;
     this.y = y;
+    this.settings = new Settings();
   }
+
   draw() {
-    // btngradient = new LinearGradient(context, start, size, color);
-    let board = new Board();
-    board.roundRect(
+    this.settings.roundRect(
       this.context,
       [this.x, this.y],
       [25, 16],
@@ -175,7 +171,7 @@ export class GreyButton {
       1
     );
 
-    board.roundRect(
+    this.settings.roundRect(
       this.context,
       [this.x + 1, this.y + 1],
       [23, 14],
@@ -184,7 +180,7 @@ export class GreyButton {
       true
     );
 
-    board.roundRect(
+    this.settings.roundRect(
       this.context,
       [this.x + 4, this.y + 3],
       [19, 10],
@@ -193,7 +189,7 @@ export class GreyButton {
       true
     );
 
-    board.roundRect(
+    this.settings.roundRect(
       this.context,
       [this.x + 3, this.y + 3],
       [19, 10],
@@ -203,7 +199,7 @@ export class GreyButton {
     );
 
     this.context.filter = "blur(1px)";
-    board.roundRect(
+    this.settings.roundRect(
       this.context,
       [this.x + 4, this.y + 3],
       [15, 6],

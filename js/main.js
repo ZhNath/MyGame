@@ -7,11 +7,3 @@ const game = new Game();
 window.onload = () => {
   game.start();
 };
-
-// function animate() {
-//   ctx.clearRect(0, 0, canvas.with, canvas.height);
-//   Game.draw();
-//   Game.update();
-//   requestAnimationFrame(animate);
-// }
-// animate();
