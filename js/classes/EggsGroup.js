@@ -1,15 +1,20 @@
 import Egg from "./Egg.js";
+import Color from "./Color.js";
 
 export default class EggsGroup {
   constructor(x, y, k) {
     this.x = x;
     this.y = y;
     this.k = k;
-    this.arrayEgg = [];
-    this.createEggs();
+    this.activeColor = "black";
+    this.passiveColor = Color.screen.shadow;
+    this.drawEggs = [];
+    this.playEggs = [4, 2];
+    this.createBank();
+    this.pastTime = 0;
   }
 
-  createEggs() {
+  createBank() {
     let angle = Math.PI;
     for (let i = -2; i <= 3; i++) {
       if (i != 0) {
@@ -18,19 +23,34 @@ export default class EggsGroup {
           (this.y += 9.1),
           angle / i
         );
-        this.arrayEgg.push(egg);
+        this.drawEggs.push(egg);
       }
     }
   }
 
-  drawBank(context, color) {
-    this.arrayEgg.forEach((egg) => {
-      egg.draw(context, color);
+  drawBank(context) {
+    this.drawEggs.forEach((egg) => {
+      egg.draw(context, this.passiveColor);
+    });
+    this.playEggs.forEach((poz) => {
+      this.drawEggs[poz].draw(context, "black");
     });
   }
 
-  drawEgg(context, color, i) {
-    this.arrayEgg[i].draw(context, color);
-    alert(`kdjf`);
+  update(realTime) {
+    console.log(this.playEggs);
+    let delta = realTime - this.pastTime;
+    if (delta > 2000) {
+      if (this.playEggs[0] === 4) this.playEggs.shift();
+
+      for (let i = 0; i < this.playEggs.length; i++) {
+        this.playEggs[i]++;
+      }
+      console.log(this.playEggs);
+      this.playEggs.push(0);
+      console.log(this.playEggs);
+
+      this.pastTime = realTime;
+    }
   }
 }

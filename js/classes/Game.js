@@ -11,11 +11,12 @@ export default class Game {
   counter = 0;
   wolf = new Player(this);
   board = new Board(this);
-  eggBankUL = new EggsGroup(177, 153.9, 1);
-  eggBankLL = new EggsGroup(177, 215, 1);
-  eggBankUR = new EggsGroup(423, 153.9, -1);
-  eggBankLR = new EggsGroup(423, 215, -1);
-
+  eggBanks = [
+    new EggsGroup(177, 153.9, 1),
+    new EggsGroup(177, 215, 1),
+    new EggsGroup(423, 153.9, -1),
+    new EggsGroup(423, 215, -1),
+  ];
   inputHandler = new InputHandler(this);
 
   start() {
@@ -25,38 +26,31 @@ export default class Game {
     this.ctx = this.canvas.getContext("2d");
     this.inputHandler.addEventListener();
     this.animate();
-    this.animateEgg();
   }
 
-  update() {
+  update(timeStamp) {
     this.wolf.update();
+    this.eggBanks.forEach((eggBank) => {
+      eggBank.update(timeStamp);
+    });
   }
 
   draw() {
     this.board.draw(this.ctx);
+    for (const eggBank of this.eggBanks) {
+      eggBank.drawBank(this.ctx);
+    }
+    ////////////////////////////
     this.wolf.draw(this.ctx);
-    this.eggBankUL.drawBank(this.ctx, Color.screen.shadow);
-    this.eggBankLL.drawBank(this.ctx, Color.screen.shadow);
-    this.eggBankUR.drawBank(this.ctx, Color.screen.shadow);
-    this.eggBankLR.drawBank(this.ctx, Color.screen.shadow);
   }
 
   onInputEvent(buttonNumber) {
     this.wolf.setPosition(buttonNumber);
   }
 
-  animate() {
+  animate(timeStamp) {
+    this.update(timeStamp);
     this.draw();
-    this.update();
-    requestAnimationFrame(() => this.animate());
-  }
-
-  animateEgg() {
-    this.clearRect(0, 0, this.ctx.width, this.ctx.height);
-    this.eggBankLL.drawEgg(this.ctx, "black", this.counter);
-    this.counter++;
-    alert(this.counter);
-    setTimeout(() => this.animateEgg(), 100);
-    // requestAnimationFrame(() => this.animateEgg());
+    requestAnimationFrame((timeStamp) => this.animate(timeStamp));
   }
 }
