@@ -1,3 +1,4 @@
+import EggsGroup from "./EggsGroup.js";
 import Board from "./Board.js";
 import Player from "./Player.js";
 import InputHandler from "./inputHandler.js";
@@ -6,8 +7,12 @@ export default class Game {
   canvas;
   ctx;
   wolf = new Player(this);
-  wolf1 = new Player(this);
   board = new Board(this);
+  eggBankUL = new EggsGroup(177, 153.9, 1);
+  eggBankLL = new EggsGroup(177, 215, 1);
+  eggBankUR = new EggsGroup(423, 153.9, -1);
+  eggBankLR = new EggsGroup(423, 215, -1);
+
   inputHandler = new InputHandler(this);
 
   start() {
@@ -26,6 +31,10 @@ export default class Game {
   draw() {
     this.board.draw(this.ctx);
     this.wolf.draw(this.ctx);
+    this.eggBankUL.draw(this.ctx);
+    this.eggBankLL.draw(this.ctx);
+    this.eggBankUR.draw(this.ctx);
+    this.eggBankLR.draw(this.ctx);
   }
 
   onInputEvent(buttonNumber) {
@@ -35,6 +44,7 @@ export default class Game {
   animate() {
     this.update();
     this.draw();
+
     requestAnimationFrame(() => this.animate());
   }
 }

@@ -11,6 +11,7 @@ export default class Color {
     light: "#e0e0e0",
     middle: "#e0e2e0",
     dark: "#cdd3cd",
+    shadow: "#b9c9b9",
   };
 
   static button = {

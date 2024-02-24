@@ -3,10 +3,10 @@ export default class Player {
     this.game = game;
     this.position = 1;
     this.positions = [
-      [240, 200],
-      [240, 260],
-      [360, 200],
-      [360, 260],
+      [245, 215],
+      [245, 275],
+      [360, 215],
+      [360, 275],
     ];
   }
   setPosition(position) {

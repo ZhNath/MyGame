@@ -226,14 +226,14 @@ export class Bank {
     this.context.moveTo(this.x, this.y);
     if (this.links) {
       this.context.lineTo(this.x + 20, this.y);
-      this.context.lineTo(this.x + 60, this.y + 25);
-      this.context.moveTo(this.x + 50, this.y + 17);
-      this.context.lineTo(this.x + 50, this.y + 37);
+      this.context.lineTo(this.x + 70, this.y + 35);
+      this.context.moveTo(this.x + 55, this.y + 23);
+      this.context.lineTo(this.x + 55, this.y + 43);
     } else {
       this.context.lineTo(this.x - 20, this.y);
-      this.context.lineTo(this.x - 60, this.y + 25);
-      this.context.moveTo(this.x - 50, this.y + 17);
-      this.context.lineTo(this.x - 50, this.y + 37);
+      this.context.lineTo(this.x - 70, this.y + 35);
+      this.context.moveTo(this.x - 55, this.y + 23);
+      this.context.lineTo(this.x - 55, this.y + 43);
     }
 
     this.context.stroke();
