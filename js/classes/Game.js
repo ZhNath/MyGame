@@ -1,11 +1,14 @@
 import EggsGroup from "./EggsGroup.js";
+import Egg from "./Egg.js";
 import Board from "./Board.js";
 import Player from "./Player.js";
 import InputHandler from "./inputHandler.js";
+import Color from "./Color.js";
 
 export default class Game {
   canvas;
   ctx;
+  counter = 0;
   wolf = new Player(this);
   board = new Board(this);
   eggBankUL = new EggsGroup(177, 153.9, 1);
@@ -22,6 +25,7 @@ export default class Game {
     this.ctx = this.canvas.getContext("2d");
     this.inputHandler.addEventListener();
     this.animate();
+    this.animateEgg();
   }
 
   update() {
@@ -31,10 +35,10 @@ export default class Game {
   draw() {
     this.board.draw(this.ctx);
     this.wolf.draw(this.ctx);
-    this.eggBankUL.draw(this.ctx);
-    this.eggBankLL.draw(this.ctx);
-    this.eggBankUR.draw(this.ctx);
-    this.eggBankLR.draw(this.ctx);
+    this.eggBankUL.drawBank(this.ctx, Color.screen.shadow);
+    this.eggBankLL.drawBank(this.ctx, Color.screen.shadow);
+    this.eggBankUR.drawBank(this.ctx, Color.screen.shadow);
+    this.eggBankLR.drawBank(this.ctx, Color.screen.shadow);
   }
 
   onInputEvent(buttonNumber) {
@@ -42,9 +46,17 @@ export default class Game {
   }
 
   animate() {
-    this.update();
     this.draw();
-
+    this.update();
     requestAnimationFrame(() => this.animate());
+  }
+
+  animateEgg() {
+    this.clearRect(0, 0, this.ctx.width, this.ctx.height);
+    this.eggBankLL.drawEgg(this.ctx, "black", this.counter);
+    this.counter++;
+    alert(this.counter);
+    setTimeout(() => this.animateEgg(), 100);
+    // requestAnimationFrame(() => this.animateEgg());
   }
 }

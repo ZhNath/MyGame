@@ -1,17 +1,15 @@
-import Color from "./Color.js";
-
-export default class Eggs {
+export default class Egg {
   constructor(x, y, angle) {
     this.x = x;
     this.y = y;
     this.angle = angle;
   }
 
-  draw(context) {
+  draw(context, color) {
     context.save();
     context.beginPath();
     context.lineWidth = 2;
-    context.strokeStyle = Color.screen.shadow;
+    context.strokeStyle = color;
     context.translate(this.x, this.y);
     context.rotate(this.angle);
     context.moveTo(0, 0);

@@ -1,11 +1,11 @@
-import Eggs from "./Eggs.js";
+import Egg from "./Egg.js";
 
 export default class EggsGroup {
   constructor(x, y, k) {
     this.x = x;
     this.y = y;
     this.k = k;
-    this.arrayEggs = [];
+    this.arrayEgg = [];
     this.createEggs();
   }
 
@@ -13,19 +13,24 @@ export default class EggsGroup {
     let angle = Math.PI;
     for (let i = -2; i <= 3; i++) {
       if (i != 0) {
-        const egg = new Eggs(
+        const egg = new Egg(
           (this.x += 13 * this.k),
           (this.y += 9.1),
           angle / i
         );
-        this.arrayEggs.push(egg);
+        this.arrayEgg.push(egg);
       }
     }
   }
 
-  draw(context) {
-    this.arrayEggs.forEach((egg) => {
-      egg.draw(context);
+  drawBank(context, color) {
+    this.arrayEgg.forEach((egg) => {
+      egg.draw(context, color);
     });
+  }
+
+  drawEgg(context, color, i) {
+    this.arrayEgg[i].draw(context, color);
+    alert(`kdjf`);
   }
 }
