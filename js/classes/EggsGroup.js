@@ -2,6 +2,11 @@ import Egg from "./Egg.js";
 import Color from "./Color.js";
 
 export default class EggsGroup {
+  static playEggs = [
+    [2, 0],
+    [1, 0],
+    [0, 2],
+  ];
   constructor(x, y, k) {
     this.x = x;
     this.y = y;
@@ -9,7 +14,6 @@ export default class EggsGroup {
     this.activeColor = "black";
     this.passiveColor = Color.screen.shadow;
     this.drawEggs = [];
-    this.playEggs = [[0, 0]];
     this.createBank();
     this.pastTime = 0;
   }
@@ -32,24 +36,23 @@ export default class EggsGroup {
     this.drawEggs.forEach((egg) => {
       egg.draw(context, this.passiveColor);
     });
-    this.playEggs.forEach((poz) => {
+
+    EggsGroup.playEggs.forEach((poz) => {
       if (poz[1] === index) this.drawEggs[poz[0]].draw(context, "black");
     });
   }
 
   update(realTime) {
-    //     console.log(this.playEggs);
     let delta = realTime - this.pastTime;
     if (delta > 500) {
-      console.log(this.playEggs[0][0]);
-      if (this.playEggs[0][0] === 4) this.playEggs.shift();
+      if (EggsGroup.playEggs.length > 0 && EggsGroup.playEggs[0][0] === 4)
+        EggsGroup.playEggs.shift();
 
-      for (let i = 0; i < this.playEggs.length; i++) {
-        this.playEggs[i][0]++;
+      for (let i = 0; i < EggsGroup.playEggs.length; i++) {
+        EggsGroup.playEggs[i][0]++;
       }
-
       let index = Math.floor(Math.random() * 4);
-      this.playEggs.push([0, index]);
+      EggsGroup.playEggs.push([0, index]);
 
       this.pastTime = realTime;
     }
