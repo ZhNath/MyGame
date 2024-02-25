@@ -42,12 +42,12 @@ export default class Game {
 
     this.wolf.draw(this.ctx);
     this.bunny.draw(this.ctx);
-    InputHandler.draw(this.ctx); //score counter
     EggsGroup.draw(this.ctx); //fault counter
   }
 
   onInputEvent(buttonNumber) {
     this.wolf.setPosition(buttonNumber);
+    EggsGroup.setWolfPoz(buttonNumber);
   }
 
   animate(timeStamp) {

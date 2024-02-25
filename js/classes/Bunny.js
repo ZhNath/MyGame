@@ -1,8 +1,9 @@
+import Color from "./Color.js";
 export default class Bunny {
   static isBunny = false;
   constructor() {
     this.pastTime = 0;
-    this.color = "rgba(0,0,255,0)";
+    this.color = Color.screen.shadow;
   }
 
   draw(context) {
@@ -14,14 +15,14 @@ export default class Bunny {
 
   update(realTime) {
     let delta = realTime - this.pastTime;
-    if (this.color == "rgba(0,0,255,0)") {
+    if (this.color == Color.screen.shadow) {
       if (delta > 3e4) {
         this.color = "rgba(0,0,255,1)";
         this.pastTime = realTime;
         Bunny.isBunny = true;
       }
     } else if (delta > 7e3) {
-      this.color = "rgba(0,0,255,0)";
+      this.color = Color.screen.shadow;
       this.pastTime = realTime;
       Bunny.isBunny = false;
     }
