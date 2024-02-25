@@ -1,7 +1,7 @@
 import EggsGroup from "./EggsGroup.js";
-import Egg from "./Egg.js";
 import Board from "./Board.js";
 import Player from "./Player.js";
+import Bunny from "./Bunny.js";
 import InputHandler from "./inputHandler.js";
 
 export default class Game {
@@ -9,6 +9,7 @@ export default class Game {
   ctx;
   counter = 0;
   wolf = new Player(this);
+  bunny = new Bunny();
   board = new Board(this);
   eggBanks = [
     new EggsGroup(177, 153.9, 1),
@@ -29,6 +30,7 @@ export default class Game {
 
   update(timeStamp) {
     this.eggBanks[0].update(timeStamp);
+    this.bunny.update(timeStamp);
   }
 
   draw() {
@@ -39,8 +41,9 @@ export default class Game {
     }
 
     this.wolf.draw(this.ctx);
-    InputHandler.draw(this.ctx);
-    EggsGroup.draw(this.ctx);
+    this.bunny.draw(this.ctx);
+    InputHandler.draw(this.ctx); //score counter
+    EggsGroup.draw(this.ctx); //fault counter
   }
 
   onInputEvent(buttonNumber) {

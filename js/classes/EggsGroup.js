@@ -1,5 +1,6 @@
 import Egg from "./Egg.js";
 import Color from "./Color.js";
+import Bunny from "./Bunny.js";
 
 export default class EggsGroup {
   static playEggs = [];
@@ -47,9 +48,10 @@ export default class EggsGroup {
     if (delta > 1000) {
       for (let i = 0; i < EggsGroup.playEggs.length; i++) {
         EggsGroup.playEggs[i][0]++;
+
         if (EggsGroup.playEggs[i][0] === 5) {
           EggsGroup.playEggs.length = 0;
-          EggsGroup.counter++;
+          EggsGroup.counter += Bunny.isBunny ? 0.5 : 1;
         }
       }
 
@@ -59,6 +61,7 @@ export default class EggsGroup {
       this.pastTime = realTime;
     }
   }
+
   static draw(context) {
     context.font = "24px Arial";
     context.fillStyle = "black";
