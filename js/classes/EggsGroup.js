@@ -2,11 +2,9 @@ import Egg from "./Egg.js";
 import Color from "./Color.js";
 
 export default class EggsGroup {
-  static playEggs = [
-    [2, 0],
-    [1, 0],
-    [0, 2],
-  ];
+  static playEggs = [];
+  static counter = 0;
+
   constructor(x, y, k) {
     this.x = x;
     this.y = y;
@@ -47,7 +45,6 @@ export default class EggsGroup {
     if (delta > 500) {
       if (EggsGroup.playEggs.length > 0 && EggsGroup.playEggs[0][0] === 4)
         EggsGroup.playEggs.shift();
-
       for (let i = 0; i < EggsGroup.playEggs.length; i++) {
         EggsGroup.playEggs[i][0]++;
       }

@@ -1,3 +1,4 @@
+import EggsGroup from "./EggsGroup.js";
 export default class Player {
   constructor(game) {
     this.game = game;
