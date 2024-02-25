@@ -40,7 +40,6 @@ export default class Game {
     for (const eggBank of this.eggBanks) {
       eggBank.drawBank(this.ctx);
     }
-    ////////////////////////////
     this.wolf.draw(this.ctx);
   }
 
