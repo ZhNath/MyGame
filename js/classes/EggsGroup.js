@@ -9,7 +9,7 @@ export default class EggsGroup {
     this.activeColor = "black";
     this.passiveColor = Color.screen.shadow;
     this.drawEggs = [];
-    this.playEggs = [4, 2];
+    this.playEggs = [[0, 0]];
     this.createBank();
     this.pastTime = 0;
   }
@@ -28,27 +28,28 @@ export default class EggsGroup {
     }
   }
 
-  drawBank(context) {
+  drawBank(context, index) {
     this.drawEggs.forEach((egg) => {
       egg.draw(context, this.passiveColor);
     });
     this.playEggs.forEach((poz) => {
-      this.drawEggs[poz].draw(context, "black");
+      if (poz[1] === index) this.drawEggs[poz[0]].draw(context, "black");
     });
   }
 
   update(realTime) {
-    console.log(this.playEggs);
+    //     console.log(this.playEggs);
     let delta = realTime - this.pastTime;
-    if (delta > 2000) {
-      if (this.playEggs[0] === 4) this.playEggs.shift();
+    if (delta > 500) {
+      console.log(this.playEggs[0][0]);
+      if (this.playEggs[0][0] === 4) this.playEggs.shift();
 
       for (let i = 0; i < this.playEggs.length; i++) {
-        this.playEggs[i]++;
+        this.playEggs[i][0]++;
       }
-      console.log(this.playEggs);
-      this.playEggs.push(0);
-      console.log(this.playEggs);
+
+      let index = Math.floor(Math.random() * 4);
+      this.playEggs.push([0, index]);
 
       this.pastTime = realTime;
     }

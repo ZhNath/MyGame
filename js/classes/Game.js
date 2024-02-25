@@ -37,9 +37,13 @@ export default class Game {
 
   draw() {
     this.board.draw(this.ctx);
-    for (const eggBank of this.eggBanks) {
-      eggBank.drawBank(this.ctx);
+    // for (const eggBank of this.eggBanks) {
+    //   eggBank.drawBank(this.ctx);
+    for (let i = 0; i < 4; i++) {
+      this.eggBanks[i].drawBank(this.ctx, i);
     }
+
+    ////////////////////////////
     this.wolf.draw(this.ctx);
   }
 
