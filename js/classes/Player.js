@@ -1,8 +1,7 @@
-import EggsGroup from "./EggsGroup.js";
 export default class Player {
   constructor(game) {
-    this.game = game;
     this.position = 1;
+    this.game = game;
     this.positions = [
       [245, 215],
       [245, 275],

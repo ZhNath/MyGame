@@ -3,7 +3,6 @@ import Egg from "./Egg.js";
 import Board from "./Board.js";
 import Player from "./Player.js";
 import InputHandler from "./inputHandler.js";
-import Color from "./Color.js";
 
 export default class Game {
   canvas;
@@ -38,8 +37,10 @@ export default class Game {
     for (let i = 0; i < 4; i++) {
       this.eggBanks[i].drawBank(this.ctx, i);
     }
+
     this.wolf.draw(this.ctx);
     InputHandler.draw(this.ctx);
+    EggsGroup.draw(this.ctx);
   }
 
   onInputEvent(buttonNumber) {
