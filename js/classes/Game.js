@@ -3,6 +3,8 @@ import Board from "./Board.js";
 import Player from "./Player.js";
 import Bunny from "./Bunny.js";
 import InputHandler from "./inputHandler.js";
+import Num from "./Numbers.js";
+import Color from "./Color.js";
 
 export default class Game {
   canvas;
@@ -42,7 +44,15 @@ export default class Game {
 
     this.wolf.draw(this.ctx);
     this.bunny.draw(this.ctx);
-    EggsGroup.draw(this.ctx); //fault counter
+
+    for (let i = 0; i < 4; i++) {
+      Num.draw8(this.ctx, 300 + 16 * i, 110, Color.screen.shadow);
+    }
+    EggsGroup.draw(this.ctx, 300, 110, "black");
+
+    // let selectedFunction = Num.array[8];
+    // selectedFunction(this.ctx, 300, 110, "black");
+    // Num.draw0(this.ctx, 300, 110, "black");
   }
 
   onInputEvent(buttonNumber) {
