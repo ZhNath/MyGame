@@ -59,7 +59,8 @@ export default class Game {
     }
 
     for (let i = 0; i < this.blinked.faultCounter; i++) {
-      this.blinked.draw(this.ctx, 355 - i * 16, 160, "black");
+      if (this.blinked.faultCounter <= 3)
+        this.blinked.draw(this.ctx, 355 - i * 16, 160, "black");
     }
   }
 
