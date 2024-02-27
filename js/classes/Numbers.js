@@ -35,7 +35,9 @@ export class Numbers {
 }
 
 export default class Num {
-  static draw8(context, x, y, color) {
+  static numPositions = [300, 316, 332, 348];
+
+  static drawShadowNum(context, x, y, color) {
     Numbers.drawElemLang(context, x, y, 0, color);
     Numbers.drawElemLang(context, x, y + 15, 0, color);
     Numbers.drawElemLang(context, x + 12, y + 15, Math.PI, color);
@@ -47,14 +49,14 @@ export default class Num {
     Numbers.drawElemShort(context, x + 12, y + 30, Math.PI, color);
   }
 
-  static draw0(context, x, y, color) {
-    Numbers.drawElemLang(context, x, y, 0, color);
-    Numbers.drawElemLang(context, x, y + 15, 0, color);
-    Numbers.drawElemLang(context, x + 12, y + 15, Math.PI, color);
-    Numbers.drawElemLang(context, x + 12, y + 30, Math.PI, color);
+  static draw0(context, x, y) {
+    Numbers.drawElemLang(context, x, y, 0, "black");
+    Numbers.drawElemLang(context, x, y + 15, 0, "black");
+    Numbers.drawElemLang(context, x + 12, y + 15, Math.PI, "black");
+    Numbers.drawElemLang(context, x + 12, y + 30, Math.PI, "black");
 
-    Numbers.drawElemShort(context, x, y, 0, color);
-    Numbers.drawElemShort(context, x + 12, y + 30, Math.PI, color);
+    Numbers.drawElemShort(context, x, y, 0, "black");
+    Numbers.drawElemShort(context, x + 12, y + 30, Math.PI, "black");
   }
 
   static draw1(context, x, y) {
@@ -111,6 +113,17 @@ export default class Num {
     Numbers.drawElemLang(context, x + 12, y + 30, Math.PI, "black");
 
     Numbers.drawElemShort(context, x, y, 0, "black");
+  }
+  static draw8(context, x, y) {
+    Numbers.drawElemLang(context, x, y, 0, "black");
+    Numbers.drawElemLang(context, x, y + 15, 0, "black");
+    Numbers.drawElemLang(context, x + 12, y + 15, Math.PI, "black");
+    Numbers.drawElemLang(context, x + 12, y + 30, Math.PI, "black");
+
+    Numbers.drawElemShort(context, x, y, 0, "black");
+    Numbers.drawElemShort(context, x, y + 15, 0, "black");
+    Numbers.drawElemShort(context, x + 12, y + 15, Math.PI, "black");
+    Numbers.drawElemShort(context, x + 12, y + 30, Math.PI, "black");
   }
   static draw9(context, x, y) {
     Numbers.drawElemLang(context, x, y, 0, "black");

@@ -11,6 +11,7 @@ export default class Bunny {
     context.fillStyle = this.color;
     context.arc(230, 130, 10, 0, Math.PI * 2);
     context.fill();
+    context.closePath();
   }
 
   update(realTime) {

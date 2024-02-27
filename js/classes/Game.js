@@ -5,6 +5,8 @@ import Bunny from "./Bunny.js";
 import InputHandler from "./inputHandler.js";
 import Num from "./Numbers.js";
 import Color from "./Color.js";
+import ScoreCounter from "./Counters.js";
+import FaultElem, { FaultElemBlink } from "./FaultElem.js";
 
 export default class Game {
   canvas;
@@ -20,6 +22,7 @@ export default class Game {
     new EggsGroup(423, 215, -1),
   ];
   inputHandler = new InputHandler(this);
+  blinked = new FaultElemBlink(this.ctx, 300, 160);
 
   start() {
     this.canvas = document.getElementById("2d-canvas");
@@ -33,6 +36,7 @@ export default class Game {
   update(timeStamp) {
     this.eggBanks[0].update(timeStamp);
     this.bunny.update(timeStamp);
+    this.blinked.update(timeStamp);
   }
 
   draw() {
@@ -46,13 +50,14 @@ export default class Game {
     this.bunny.draw(this.ctx);
 
     for (let i = 0; i < 4; i++) {
-      Num.draw8(this.ctx, 300 + 16 * i, 110, Color.screen.shadow);
+      Num.drawShadowNum(this.ctx, 300 + 16 * i, 110, Color.screen.shadow);
     }
-    EggsGroup.draw(this.ctx, 300, 110, "black");
 
-    // let selectedFunction = Num.array[8];
-    // selectedFunction(this.ctx, 300, 110, "black");
-    // Num.draw0(this.ctx, 300, 110, "black");
+    ScoreCounter.draw(this.ctx, 110);
+
+    for (let i = 0; i < 3; i++) {
+      FaultElem.draw(this.ctx, 355 - 16 * i, 160);
+    }
   }
 
   onInputEvent(buttonNumber) {

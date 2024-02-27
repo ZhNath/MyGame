@@ -85,24 +85,9 @@ export default class EggsGroup {
     }
   }
 
-  static draw(context, x, y, color) {
-    let numInArray = EggsGroup.scoreCounter.toString().split("").map(Number);
-
-    // while (numInArray.length < 4) {
-    //   numInArray.unshift(0);
-    // }
-
-    // for (let i = 0; i < 3; i++) {
-    //   console.log(numInArray[i]);
-    //   const index = numInArray[i];
-    //   const func = Num.array[index];
-    //   func(context, x + 16 * i, y, color);
-    // }
-  }
   // static draw(context) {
   //   context.font = "24px Calculator";
   //   context.fillStyle = "black";
   //   context.fillText(EggsGroup.scoreCounter, 50, 50);
   //   context.fillText(EggsGroup.faultCounter, 150, 50);
-  // }
 }
