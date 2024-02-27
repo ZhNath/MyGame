@@ -1,33 +1,35 @@
 import Color from "./Color.js";
+import EggsGroup from "./EggsGroup.js";
 
 export default class FaultElem {
   constructor(context, x, y) {
     this.context = context;
     this.x = x;
     this.y = y;
+    this.pastTime = 0;
+    this.min, this.max;
+    this.faultCounter = EggsGroup.faultTempCounter;
   }
-  static color = Color.screen.shadow;
+  color;
+  // faultCounter;
 
-  static draw(context, x, y) {
+  draw(context, x, y, color) {
     context.beginPath();
-    context.fillStyle = FaultElem.color;
+    context.fillStyle = color;
     context.arc(x, y, 7, 0, Math.PI * 2);
     context.fill();
     context.closePath();
   }
-}
-
-export class FaultElemBlink extends FaultElem {
-  constructor(context, x, y) {
-    super(context, x, y);
-    this.pastTime = 0;
-  }
 
   update(realTime) {
+    let min, max;
     let delta = realTime - this.pastTime;
+    min = EggsGroup.faultTempCounter - 0.5;
+    max = EggsGroup.faultTempCounter + 0.5;
     if (delta > 1000) {
-      FaultElem.color =
-        FaultElem.color === Color.screen.shadow ? "black" : Color.screen.shadow;
+      if (EggsGroup.faultTempCounter % 1 !== 0) {
+        this.faultCounter = this.faultCounter === min ? max : min;
+      } else this.faultCounter = EggsGroup.faultTempCounter;
       this.pastTime = realTime;
     }
   }

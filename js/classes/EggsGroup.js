@@ -6,7 +6,7 @@ import Num, { Numbers } from "./Numbers.js";
 export default class EggsGroup {
   static playEggs = [];
   static scoreCounter = 0;
-  static faultCounter = 0;
+  static faultTempCounter = 0;
   static wolfPoz;
 
   constructor(x, y, k, game) {
@@ -75,7 +75,7 @@ export default class EggsGroup {
             EggsGroup.scoreCounter++;
           } else {
             EggsGroup.playEggs.length = 0;
-            EggsGroup.faultCounter += Bunny.isBunny ? 0.5 : 1;
+            EggsGroup.faultTempCounter += Bunny.isBunny ? 0.5 : 1;
             realTime += 3000;
           }
         }

@@ -6,12 +6,11 @@ import InputHandler from "./inputHandler.js";
 import Num from "./Numbers.js";
 import Color from "./Color.js";
 import ScoreCounter from "./Counters.js";
-import FaultElem, { FaultElemBlink } from "./FaultElem.js";
+import FaultElem from "./FaultElem.js";
 
 export default class Game {
   canvas;
   ctx;
-  counter = 0;
   wolf = new Player(this);
   bunny = new Bunny();
   board = new Board(this);
@@ -22,7 +21,7 @@ export default class Game {
     new EggsGroup(423, 215, -1),
   ];
   inputHandler = new InputHandler(this);
-  blinked = new FaultElemBlink(this.ctx, 300, 160);
+  blinked = new FaultElem(this.ctx, 250, 160);
 
   start() {
     this.canvas = document.getElementById("2d-canvas");
@@ -56,7 +55,11 @@ export default class Game {
     ScoreCounter.draw(this.ctx, 110);
 
     for (let i = 0; i < 3; i++) {
-      FaultElem.draw(this.ctx, 355 - 16 * i, 160);
+      this.blinked.draw(this.ctx, 355 - 16 * i, 160, Color.screen.shadow);
+    }
+
+    for (let i = 0; i < this.blinked.faultCounter; i++) {
+      this.blinked.draw(this.ctx, 355 - i * 16, 160, "black");
     }
   }
 
