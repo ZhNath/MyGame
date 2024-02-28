@@ -7,7 +7,7 @@ export default class FaultCounter {
     this.min, this.max;
   }
   color;
-  // faultCounter;
+
   setFaultCounter(faultTempCounter) {
     this.faultTempCounter = faultTempCounter;
   }

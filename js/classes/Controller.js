@@ -1,10 +1,11 @@
 export default class Controller {
-  static playEggs = [];
+  static playEggs = [[0, 0]];
   static scoreCounter = 0;
   static faultTempCounter = 0;
   static wolfPoz;
   static isBunny;
   static pastTime = 0;
+  static timeOfStatic = 500;
 
   static setBunnyStatus(status) {
     Controller.isBunny = status;
@@ -51,23 +52,41 @@ export default class Controller {
     return index;
   }
 
+  static flag = 0;
+
   static update(realTime) {
     let delta = realTime - Controller.pastTime;
+
     //     *****
-    if (delta > 600) {
-      console.log("update");
+    function pushEggToPlayEggs() {
+      let inclusiveIndex = Controller.changeBank();
+      Controller.playEggs.push([0, inclusiveIndex]);
+      Controller.flag = 0;
+    }
+
+    if (delta > Controller.timeOfStatic) {
       for (let i = 0; i < Controller.playEggs.length; i++) {
         Controller.playEggs[i][0]++;
       }
 
-      let inclusiveIndex = Controller.changeBank();
-      Controller.playEggs.push([0, inclusiveIndex]);
+      // ***************************************************
+      if (
+        (Controller.flag === 5 && Controller.scoreCounter >= 0) ||
+        (Controller.flag === 4 && Controller.scoreCounter >= 5) ||
+        (Controller.flag === 3 && Controller.scoreCounter >= 10) ||
+        (Controller.flag === 2 && Controller.scoreCounter >= 15) ||
+        (Controller.flag === 1 && Controller.scoreCounter >= 700)
+      )
+        pushEggToPlayEggs();
+      Controller.flag++;
 
+      // ******************************************************
       if (Controller.playEggs.length) {
         if (Controller.playEggs[0][0] === 5) {
           if (Controller.wolfPoz - 1 === Controller.playEggs[0][1]) {
             Controller.playEggs.shift();
             Controller.scoreCounter++;
+            Controller.timeOfStatic -= Controller.timeOfStatic / 200;
           } else {
             Controller.playEggs.length = 0;
             Controller.faultTempCounter += Controller.isBunny ? 0.5 : 1;
@@ -76,6 +95,22 @@ export default class Controller {
         }
       }
 
+      console.log("Controller" + Controller.timeOfStatic);
+      if (
+        Controller.scoreCounter % 100 === 0 &&
+        Controller.scoreCounter !== 0 &&
+        Controller.scoreCounter !== 700 &&
+        Controller.scoreCounter !== 900
+      )
+        Controller.timeOfStatic *= 1.2;
+
+      if (Controller.scoreCounter === 200 || Controller.scoreCounter === 500) {
+        Controller.faultTempCounter = 0;
+      }
+
+      if (Controller.scoreCounter === 700) {
+        Controller.timeOfStatic *= 1.4;
+      }
       Controller.pastTime = realTime;
     }
   }
