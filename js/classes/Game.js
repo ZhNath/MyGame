@@ -1,12 +1,14 @@
-import EggsGroup from "./EggsGroup.js";
+import EggsBanks from "./EggsBanks.js";
 import Board from "./Board.js";
 import Player from "./Player.js";
 import Bunny from "./Bunny.js";
 import InputHandler from "./inputHandler.js";
 import Num from "./Numbers.js";
 import Color from "./Color.js";
-import ScoreCounter from "./Counters.js";
-import FaultElem from "./FaultElem.js";
+import ScoreCounter from "./ScoreCounter.js";
+import FaultCounter from "./FaultCounter.js";
+import Settings from "./Settings.js";
+import Controller from "./Controller.js";
 
 export default class Game {
   canvas;
@@ -14,27 +16,36 @@ export default class Game {
   wolf = new Player(this);
   bunny = new Bunny();
   board = new Board(this);
-  eggBanks = [
-    new EggsGroup(177, 153.9, 1),
-    new EggsGroup(177, 215, 1),
-    new EggsGroup(423, 153.9, -1),
-    new EggsGroup(423, 215, -1),
+  eggBank = [
+    new EggsBanks(177, 153.9, 1),
+    new EggsBanks(177, 215, 1),
+    new EggsBanks(423, 153.9, -1),
+    new EggsBanks(423, 215, -1),
   ];
   inputHandler = new InputHandler(this);
-  blinked = new FaultElem(this.ctx, 250, 160);
+  blinked = new FaultCounter(this.ctx, 250, 160);
+  controller = new Controller();
 
   start() {
     this.canvas = document.getElementById("2d-canvas");
-    this.canvas.width = Board.canvas.width;
-    this.canvas.height = Board.canvas.height;
+    this.canvas.width = Settings.canvas.width;
+    this.canvas.height = Settings.canvas.height;
     this.ctx = this.canvas.getContext("2d");
     this.inputHandler.addEventListener();
     this.animate();
   }
 
   update(timeStamp) {
-    this.eggBanks[0].update(timeStamp);
+    Controller.update(timeStamp);
+    EggsBanks.setPlayEggs(Controller.playEggs);
+
     this.bunny.update(timeStamp);
+    Controller.setBunnyStatus(this.bunny.isBunny);
+
+    ScoreCounter.setScoreCount(Controller.scoreCounter);
+
+    this.blinked.setFaultCounter(Controller.faultTempCounter);
+
     this.blinked.update(timeStamp);
   }
 
@@ -42,7 +53,7 @@ export default class Game {
     this.board.draw(this.ctx);
 
     for (let i = 0; i < 4; i++) {
-      this.eggBanks[i].drawBank(this.ctx, i);
+      this.eggBank[i].draw(this.ctx, i);
     }
 
     this.wolf.draw(this.ctx);
@@ -66,7 +77,7 @@ export default class Game {
 
   onInputEvent(buttonNumber) {
     this.wolf.setPosition(buttonNumber);
-    EggsGroup.setWolfPoz(buttonNumber);
+    Controller.setWolfPoz(buttonNumber);
   }
 
   animate(timeStamp) {

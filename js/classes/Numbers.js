@@ -136,7 +136,7 @@ export default class Num {
     Numbers.drawElemShort(context, x + 12, y + 30, Math.PI, "black");
   }
 
-  static array = [
+  static numbersVorCaunter = [
     Num.draw0,
     Num.draw1,
     Num.draw2,
