@@ -99,8 +99,7 @@ export default class Controller {
       if (
         Controller.scoreCounter % 100 === 0 &&
         Controller.scoreCounter !== 0 &&
-        Controller.scoreCounter !== 700 &&
-        Controller.scoreCounter !== 900
+        Controller.scoreCounter !== 700
       )
         Controller.timeOfStatic *= 1.2;
 
