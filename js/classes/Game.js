@@ -12,6 +12,7 @@ import Controller from "./Controller.js";
 
 export default class Game {
   canvas;
+  isStop;
   ctx;
   wolf = new Player(this);
   bunny = new Bunny();
@@ -30,6 +31,7 @@ export default class Game {
     this.canvas = document.getElementById("2d-canvas");
     this.canvas.width = Settings.canvas.width;
     this.canvas.height = Settings.canvas.height;
+    this.isStop = Settings.isStop;
     this.ctx = this.canvas.getContext("2d");
     this.inputHandler.addEventListener();
     this.animate();

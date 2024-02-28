@@ -3,4 +3,5 @@ export default class Settings {
     width: 601,
     height: 401,
   };
+  static isStop = false;
 }
