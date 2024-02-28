@@ -21,17 +21,47 @@ export default class Controller {
     }
   }
 
+  static changeBank() {
+    let exclusiveIndex;
+    let index;
+
+    switch (Controller.faultTempCounter) {
+      case 0:
+        exclusiveIndex = 1;
+        break;
+      case 0.5:
+      case 1:
+        exclusiveIndex = 3;
+        break;
+      case 1.5:
+      case 2:
+        exclusiveIndex = 0;
+        break;
+      case 2.5:
+      case 3:
+        exclusiveIndex = 2;
+        break;
+      case 3.5:
+        exclusiveIndex = undefined;
+    }
+
+    do {
+      index = Math.floor(Math.random() * 4);
+    } while (index === exclusiveIndex);
+    return index;
+  }
+
   static update(realTime) {
     let delta = realTime - Controller.pastTime;
     //     *****
-    if (delta > 700) {
+    if (delta > 600) {
       console.log("update");
       for (let i = 0; i < Controller.playEggs.length; i++) {
         Controller.playEggs[i][0]++;
       }
 
-      let index = Math.floor(Math.random() * 4);
-      Controller.playEggs.push([0, index]);
+      let inclusiveIndex = Controller.changeBank();
+      Controller.playEggs.push([0, inclusiveIndex]);
 
       if (Controller.playEggs.length) {
         if (Controller.playEggs[0][0] === 5) {
