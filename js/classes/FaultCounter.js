@@ -4,7 +4,9 @@ export default class FaultCounter {
     this.x = x;
     this.y = y;
     this.pastTime = 0;
-    this.min, this.max;
+    this.past2Time = 0;
+    this.delay;
+    this.flag = 0;
   }
   color;
 
@@ -30,6 +32,15 @@ export default class FaultCounter {
         this.faultCounter = this.faultCounter === min ? max : min;
       } else this.faultCounter = this.faultTempCounter;
       this.pastTime = realTime;
+    }
+  }
+
+  updateWhenStop(realTime = 0) {
+    let delta = realTime - this.past2Time;
+
+    if (delta > 250) {
+      this.faultCounter = this.faultCounter === 3 ? 0 : 3;
+      this.past2Time = realTime;
     }
   }
 }

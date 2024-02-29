@@ -294,7 +294,7 @@ export class Egg {
     this.angle = angle;
   }
 
-  draw(context, color) {
+  drawBegin(context, color) {
     context.save();
     context.beginPath();
     context.lineWidth = 2;
@@ -302,10 +302,54 @@ export class Egg {
     context.translate(this.x, this.y);
     context.rotate(this.angle);
     context.moveTo(0, 0);
+  }
+
+  drawBasic(context) {
     context.bezierCurveTo(0, 0, 3, -10, 6, 0);
     context.bezierCurveTo(6, 0, 7, 4, 3, 4);
     context.bezierCurveTo(3, 4, -1, 4, 0, 0);
+  }
+
+  drawEnd(context) {
     context.closePath();
+    context.stroke();
+    context.restore();
+  }
+
+  draw(context, color) {
+    this.drawBegin(context, color);
+    this.drawBasic(context);
+    this.drawEnd(context);
+  }
+}
+
+export class HalfEgg extends Egg {
+  constructor(x, y, angle) {
+    super(x, y, angle);
+  }
+
+  drawUp(context, color) {
+    super.drawBegin(context, color);
+    context.bezierCurveTo(0, 0, 6, -20, 12, 0);
+    context.lineTo(10, -4);
+    context.lineTo(8, 4);
+    context.lineTo(4, -3);
+    context.lineTo(0, 0);
+    context.stroke();
+    context.restore();
+  }
+
+  drawBottom(context, color) {
+    super.drawBegin(context, color);
+
+    context.bezierCurveTo(0, 0, -2, 8, 6, 8);
+    context.bezierCurveTo(6, 8, 14, 8, 12, 0);
+    context.lineTo(12, 0);
+    context.lineTo(10, -4);
+    context.lineTo(8, 4);
+    context.lineTo(4, -3);
+    context.lineTo(0, 0);
+
     context.stroke();
     context.restore();
   }

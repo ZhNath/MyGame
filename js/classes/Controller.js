@@ -4,8 +4,7 @@ export default class Controller {
   static faultTempCounter = 0;
   static wolfPoz;
   static isBunny;
-  static pastTime = 0;
-  static timeOfStatic = 500;
+  // static isStop = false;
 
   static setBunnyStatus(status) {
     Controller.isBunny = status;
@@ -52,35 +51,38 @@ export default class Controller {
     return index;
   }
 
-  static flag = 0;
+  static pastTime = 0;
+  static timeOfStatic = 500;
+  static refreshedTimes = 0;
 
   static update(realTime) {
-    let delta = realTime - Controller.pastTime;
-
     //     *****
     function pushEggToPlayEggs() {
       let inclusiveIndex = Controller.changeBank();
       Controller.playEggs.push([0, inclusiveIndex]);
-      Controller.flag = 0;
+      Controller.refreshedTimes = 0;
     }
+
+    let delta = realTime - Controller.pastTime;
 
     if (delta > Controller.timeOfStatic) {
       for (let i = 0; i < Controller.playEggs.length; i++) {
         Controller.playEggs[i][0]++;
       }
 
-      // ***************************************************
+      // ******************
       if (
-        (Controller.flag === 5 && Controller.scoreCounter >= 0) ||
-        (Controller.flag === 4 && Controller.scoreCounter >= 5) ||
-        (Controller.flag === 3 && Controller.scoreCounter >= 10) ||
-        (Controller.flag === 2 && Controller.scoreCounter >= 15) ||
-        (Controller.flag === 1 && Controller.scoreCounter >= 700)
+        (Controller.refreshedTimes === 5 && Controller.scoreCounter >= 0) ||
+        (Controller.refreshedTimes === 4 && Controller.scoreCounter >= 5) ||
+        (Controller.refreshedTimes === 3 && Controller.scoreCounter >= 10) ||
+        (Controller.refreshedTimes === 2 && Controller.scoreCounter >= 15) ||
+        (Controller.refreshedTimes === 1 && Controller.scoreCounter >= 700)
       )
         pushEggToPlayEggs();
-      Controller.flag++;
 
-      // ******************************************************
+      Controller.refreshedTimes++;
+
+      // ****************
       if (Controller.playEggs.length) {
         if (Controller.playEggs[0][0] === 5) {
           if (Controller.wolfPoz - 1 === Controller.playEggs[0][1]) {
@@ -90,26 +92,28 @@ export default class Controller {
           } else {
             Controller.playEggs.length = 0;
             Controller.faultTempCounter += Controller.isBunny ? 0.5 : 1;
-            realTime += 3000;
+            realTime += 1500;
           }
         }
       }
 
-      console.log("Controller" + Controller.timeOfStatic);
       if (
         Controller.scoreCounter % 100 === 0 &&
         Controller.scoreCounter !== 0 &&
         Controller.scoreCounter !== 700
-      )
+      ) {
         Controller.timeOfStatic *= 1.2;
-
-      if (Controller.scoreCounter === 200 || Controller.scoreCounter === 500) {
-        Controller.faultTempCounter = 0;
       }
 
       if (Controller.scoreCounter === 700) {
         Controller.timeOfStatic *= 1.4;
       }
+
+      if (Controller.scoreCounter === 3 || Controller.scoreCounter === 500) {
+        Controller.faultTempCounter = 0;
+        Controller.isStop = true;
+      }
+      console.log(Controller.isStop);
       Controller.pastTime = realTime;
     }
   }
