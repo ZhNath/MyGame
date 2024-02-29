@@ -113,7 +113,6 @@ export default class Controller {
         Controller.faultTempCounter = 0;
         Controller.isStop = true;
       }
-      console.log(Controller.isStop);
       Controller.pastTime = realTime;
     }
   }

@@ -24,11 +24,29 @@ export default class Game {
     new EggsBanks(423, 153.9, -1),
     new EggsBanks(423, 215, -1),
   ];
+
+  liveEgg = [[], [], []];
+  makeArrayEgg(x0, eggWidth, distance) {
+    for (let i = 0; i < 3; i++) {
+      this.liveEgg[i][0] = new HalfEgg(
+        x0 - i * distance,
+        170,
+        (Math.PI * 5) / 4,
+        0.7
+      );
+      this.liveEgg[i][1] = new HalfEgg(
+        x0 - eggWidth - i * distance,
+        170,
+        -Math.PI / 4,
+        0.7
+      );
+    }
+  }
+
   inputHandler = new InputHandler(this);
   blinked = new FaultCounter(this.ctx, 250, 160);
   controller = new Controller();
-  halfEggRight = new HalfEgg(320, 200, (3 * Math.PI) / 4);
-  halfEggLeft = new HalfEgg(295, 200, Math.PI / 4);
+
   pastTime = 0;
 
   start() {
@@ -36,6 +54,7 @@ export default class Game {
     this.canvas.width = Settings.canvas.width;
     this.canvas.height = Settings.canvas.height;
     this.ctx = this.canvas.getContext("2d");
+    this.makeArrayEgg(370, 19, 32);
     this.inputHandler.addEventListener();
     this.animate();
   }
@@ -76,17 +95,18 @@ export default class Game {
     ScoreCounter.draw(this.ctx, 110);
 
     for (let i = 0; i < 3; i++) {
-      this.blinked.draw(this.ctx, 355 - 16 * i, 160, Color.screen.shadow);
+      this.liveEgg[i][0].drawUp(this.ctx, Color.screen.shadow);
+
+      this.liveEgg[i][1].drawBottom(this.ctx, Color.screen.shadow);
     }
 
     for (let i = 0; i < this.blinked.faultCounter; i++) {
-      if (this.blinked.faultCounter <= 3)
-        this.blinked.draw(this.ctx, 355 - i * 16, 160, "black");
+      if (this.blinked.faultCounter <= 3) {
+        this.liveEgg[i][0].drawUp(this.ctx, "black");
+
+        this.liveEgg[i][1].drawBottom(this.ctx, "black");
+      }
     }
-
-    this.halfEggRight.drawUp(this.ctx, Color.screen.shadow);
-
-    this.halfEggLeft.drawBottom(this.ctx, Color.screen.shadow);
   }
 
   onInputEvent(buttonNumber) {

@@ -253,6 +253,7 @@ export class Haus {
     this.context.lineWidth = 2;
     this.context.fillRect(this.x + 39, this.y - 10, 5, 20);
     this.context.strokeRect(this.x + 44, this.y - 10, 5, 20);
+    this.context.closePath();
 
     this.context.beginPath();
     this.context.lineWidth = 4;
@@ -261,6 +262,7 @@ export class Haus {
     this.context.lineTo(this.x + 60, this.y + 15);
     this.context.lineTo(this.x + 49, this.y + 10);
     this.context.stroke();
+    this.context.closePath();
 
     this.context.beginPath();
     this.context.lineWidth = 2;
@@ -268,6 +270,7 @@ export class Haus {
     this.context.lineTo(this.x + 60, this.y);
 
     this.context.stroke();
+    this.context.closePath();
 
     this.context.strokeStyle = this.color[0];
     this.context.fillStyle = this.color[0];
@@ -278,17 +281,20 @@ export class Haus {
     this.context.lineTo(this.x + 20, this.y - 25);
     this.context.lineTo(this.x + 48, this.y + 20);
     this.context.stroke();
+    this.context.closePath();
 
     this.context.beginPath();
     this.context.moveTo(this.x + 26, this.y - 15);
     this.context.lineTo(this.x + 39, this.y - 15);
     this.context.lineTo(this.x + 39, this.y + 10);
     this.context.fill();
+
+    this.context.closePath();
   }
 }
 
 export class Egg {
-  constructor(x, y, angle) {
+  constructor(x, y, angle, k) {
     this.x = x;
     this.y = y;
     this.angle = angle;
@@ -324,33 +330,43 @@ export class Egg {
 }
 
 export class HalfEgg extends Egg {
-  constructor(x, y, angle) {
+  constructor(x, y, angle, k) {
     super(x, y, angle);
+    this.k = k;
   }
 
   drawUp(context, color) {
     super.drawBegin(context, color);
-    context.bezierCurveTo(0, 0, 6, -20, 12, 0);
-    context.lineTo(10, -4);
-    context.lineTo(8, 4);
-    context.lineTo(4, -3);
-    context.lineTo(0, 0);
-    context.stroke();
-    context.restore();
+    context.bezierCurveTo(0, 0, 6 * this.k, -20 * this.k, 12 * this.k, 0);
+    context.lineTo(10 * this.k, -4 * this.k);
+    context.lineTo(8 * this.k, 4 * this.k);
+    context.lineTo(4 * this.k, -3 * this.k);
+    context.lineTo(0 * this.k, 0 * this.k);
+    super.drawEnd(context);
   }
 
   drawBottom(context, color) {
     super.drawBegin(context, color);
-
-    context.bezierCurveTo(0, 0, -2, 8, 6, 8);
-    context.bezierCurveTo(6, 8, 14, 8, 12, 0);
-    context.lineTo(12, 0);
-    context.lineTo(10, -4);
-    context.lineTo(8, 4);
-    context.lineTo(4, -3);
+    context.bezierCurveTo(
+      0,
+      0,
+      -2 * this.k,
+      8 * this.k,
+      6 * this.k,
+      8 * this.k
+    );
+    context.bezierCurveTo(
+      6 * this.k,
+      8 * this.k,
+      14 * this.k,
+      8 * this.k,
+      12 * this.k,
+      0
+    );
+    context.lineTo(10 * this.k, -4 * this.k);
+    context.lineTo(8 * this.k, 4 * this.k);
+    context.lineTo(4 * this.k, -3 * this.k);
     context.lineTo(0, 0);
-
-    context.stroke();
-    context.restore();
+    super.drawEnd(context);
   }
 }
