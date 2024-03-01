@@ -7,23 +7,25 @@ export default class Bunny {
     this.pastTime = 0;
     this.color = Color.screen.shadow;
     this.bunny = new Image();
+    this.link = "../../images/rabbit_shadow.svg";
   }
 
   draw(context) {
-    this.bunny.src = "../../images/rabbit.svg";
+    this.bunny.src = this.link;
     context.drawImage(this.bunny, 215, 100, 80, 70);
   }
 
   update(realTime) {
     let delta = realTime - this.pastTime;
-    if (this.color == Color.screen.shadow) {
+    if (this.link === "../../images/rabbit_shadow.svg") {
       if (delta > 3e4) {
-        this.color = "rgba(0,0,255,1)";
+        this.link = "../../images/rabbit.svg";
+
         this.pastTime = realTime;
         this.isBunny = true;
       }
     } else if (delta > 7e3) {
-      this.color = Color.screen.shadow;
+      this.link = "../../images/rabbit_shadow.svg";
       this.pastTime = realTime;
       this.isBunny = false;
     }
