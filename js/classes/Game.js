@@ -16,6 +16,7 @@ export default class Game {
   ctx;
   animationGlobal;
   wolf = new Player(this);
+
   bunny = new Bunny();
   board = new Board(this);
   eggBank = [
