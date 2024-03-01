@@ -6,14 +6,12 @@ export default class Bunny {
   constructor() {
     this.pastTime = 0;
     this.color = Color.screen.shadow;
+    this.bunny = new Image();
   }
 
   draw(context) {
-    context.beginPath();
-    context.fillStyle = this.color;
-    context.arc(230, 130, 10, 0, Math.PI * 2);
-    context.fill();
-    context.closePath();
+    this.bunny.src = "../../images/rabbit.svg";
+    context.drawImage(this.bunny, 215, 100, 80, 70);
   }
 
   update(realTime) {
