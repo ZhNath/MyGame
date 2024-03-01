@@ -10,6 +10,7 @@ import FaultCounter from "./FaultCounter.js";
 import Settings from "./Settings.js";
 import Controller from "./Controller.js";
 import { HalfEgg } from "./Drawing.js";
+import Glass from "./Glass.js";
 
 export default class Game {
   canvas;
@@ -19,6 +20,8 @@ export default class Game {
 
   bunny = new Bunny();
   board = new Board(this);
+  glass = new Glass(this);
+
   eggBank = [
     new EggsBanks(177, 153.9, 1),
     new EggsBanks(177, 215, 1),
@@ -110,6 +113,8 @@ export default class Game {
         this.liveEgg[i][1].drawBottom(this.ctx, "black");
       }
     }
+
+    this.glass.draw(this.ctx);
   }
 
   onInputEvent(buttonNumber) {
