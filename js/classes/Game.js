@@ -54,8 +54,10 @@ export default class Game {
     this.canvas.width = Settings.canvas.width;
     this.canvas.height = Settings.canvas.height;
     this.ctx = this.canvas.getContext("2d");
+
     this.makeArrayEgg(370, 19, 32);
     this.inputHandler.addEventListener();
+
     this.animate();
   }
 

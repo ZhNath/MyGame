@@ -110,19 +110,21 @@ export class RedButton {
     );
     grad1.draw(context);
 
-    context.fillStyle = "red";
     context.beginPath();
+    context.fillStyle = "red";
     context.filter = "blur(3px)";
     context.arc(this.x, this.y + 1, this.radius - 2, 0, Math.PI * 2);
     context.fill();
+    context.closePath();
     context.filter = "none";
 
-    context.fillStyle = btngradient.draw();
     context.beginPath();
+    context.fillStyle = btngradient.draw();
     context.filter = "blur(2px)";
     context.arc(this.x - 5, this.y - 12, 5, 0, Math.PI * 2);
     context.fill();
     context.filter = "none";
+    context.closePath();
   }
 }
 
@@ -219,9 +221,9 @@ export class Bank {
     this.color = color;
   }
   draw() {
+    this.context.beginPath();
     this.context.strokeStyle = this.color;
     this.context.lineWidth = 5;
-    this.context.beginPath();
     this.context.moveTo(this.x, this.y);
     if (this.links) {
       this.context.lineTo(this.x + 20, this.y);
@@ -236,6 +238,7 @@ export class Bank {
     }
 
     this.context.stroke();
+    this.context.closePath();
   }
 }
 
@@ -247,9 +250,9 @@ export class Haus {
     this.color = color;
   }
   draw() {
+    this.context.beginPath();
     this.context.strokeStyle = this.color[1];
     this.context.fillStyle = this.color[1];
-
     this.context.lineWidth = 2;
     this.context.fillRect(this.x + 39, this.y - 10, 5, 20);
     this.context.strokeRect(this.x + 44, this.y - 10, 5, 20);
@@ -272,11 +275,11 @@ export class Haus {
     this.context.stroke();
     this.context.closePath();
 
+    this.context.beginPath();
     this.context.strokeStyle = this.color[0];
     this.context.fillStyle = this.color[0];
 
     this.context.lineWidth = 5;
-    this.context.beginPath();
     this.context.moveTo(this.x, this.y);
     this.context.lineTo(this.x + 20, this.y - 25);
     this.context.lineTo(this.x + 48, this.y + 20);
