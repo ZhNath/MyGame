@@ -7,7 +7,7 @@ import Color, { LinearGradient } from "./Color.js";
 export default class Board {
   constructor(game) {
     this.game = game;
-    this.settings = new Drawing();
+    this.gameboard = new Drawing();
     this.width = Settings.canvas.width;
     this.height = Settings.canvas.height;
   }
@@ -26,7 +26,7 @@ export default class Board {
     );
 
     const extBorder = () => {
-      this.settings.roundRect(
+      this.gameboard.roundRect(
         context,
         [14, 14],
         [this.width - 28, this.height - 28],
@@ -36,7 +36,7 @@ export default class Board {
         8
       );
 
-      this.settings.roundRect(
+      this.gameboard.roundRect(
         context,
         [17, 17],
         [this.width - 34, this.height - 34],
@@ -46,7 +46,7 @@ export default class Board {
         3
       );
 
-      this.settings.roundRect(
+      this.gameboard.roundRect(
         context,
         [19, 19],
         [this.width - 38, this.height - 38],
@@ -58,28 +58,28 @@ export default class Board {
     extBorder();
 
     const bevelBoarder = () => {
-      this.settings.triangleBoard(
+      this.gameboard.triangleBoard(
         context,
         [105, 50],
         [this.width - 105, 50],
         Color.box.light1
       );
 
-      this.settings.triangleBoard(
+      this.gameboard.triangleBoard(
         context,
         [this.width - 105, 50],
         [this.width - 105, this.height - 50],
         Color.box.light2
       );
 
-      this.settings.triangleBoard(
+      this.gameboard.triangleBoard(
         context,
         [this.width - 105, this.height - 50],
         [105, this.height - 50],
         Color.box.dark
       );
 
-      this.settings.triangleBoard(
+      this.gameboard.triangleBoard(
         context,
         [105, this.height - 50],
         [105, 50],
@@ -89,7 +89,7 @@ export default class Board {
     bevelBoarder();
 
     const intBorder = () => {
-      this.settings.roundRect(
+      this.gameboard.roundRect(
         context,
         [125, 65],
         [this.width - 250, this.height - 130],
@@ -98,7 +98,7 @@ export default class Board {
         true
       );
 
-      this.settings.roundRect(
+      this.gameboard.roundRect(
         context,
         [135, 75],
         [this.width - 270, this.height - 150],
@@ -116,7 +116,7 @@ export default class Board {
         [Color.screen.light, Color.screen.middle, Color.screen.dark]
       );
 
-      this.settings.roundRect(
+      this.gameboard.roundRect(
         context,
         [154, 94],
         [this.width - 308, this.height - 188],
@@ -134,7 +134,7 @@ export default class Board {
       context.stroke();
       context.filter = "none";
 
-      this.settings.roundRect(
+      this.gameboard.roundRect(
         context,
         [155, 95],
         [this.width - 310, this.height - 190],
@@ -144,7 +144,7 @@ export default class Board {
         4
       );
 
-      this.settings.roundRect(
+      this.gameboard.roundRect(
         context,
         [150, 90],
         [this.width - 300, this.height - 180],
@@ -154,7 +154,7 @@ export default class Board {
         5
       );
 
-      this.settings.roundRect(
+      this.gameboard.roundRect(
         context,
         [151, 91],
         [this.width - 302, this.height - 182],
@@ -204,7 +204,14 @@ export default class Board {
       buttonGray1.draw();
       buttonGray2.draw();
       buttonGray3.draw();
+
+      context.font = "8px "; // Задаем шрифт и размер текста
+      context.fillStyle = "black"; // Задаем цвет текста
+      context.fillText("Game A", this.width - 72, 85);
+      context.fillText("Game B", this.width - 72, 115);
+      context.fillText("Menu", this.width - 68, 145);
     };
+
     greyButtons();
   }
 }

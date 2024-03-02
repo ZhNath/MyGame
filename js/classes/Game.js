@@ -10,6 +10,7 @@ import FaultCounter from "./FaultCounter.js";
 import Settings from "./Settings.js";
 import Controller from "./Controller.js";
 import Glass from "./Glass.js";
+import Menu from "./Menu.js";
 
 export default class Game {
   canvas;
@@ -20,6 +21,7 @@ export default class Game {
   bunny = new Bunny();
   board = new Board(this);
   glass = new Glass(this);
+  menu = new Menu();
 
   eggBank = [
     new EggsBanks(177, 153.9, 1),
@@ -103,8 +105,11 @@ export default class Game {
   }
 
   onMouseEvent(eventNumber) {
-    this.animate();
-    if (eventNumber === 2) Controller.gameB = true;
+    if (eventNumber === 3) this.menu.draw(this.ctx);
+    else {
+      this.animate();
+      if (eventNumber === 2) Controller.gameB = true;
+    }
   }
 
   animate(timeStamp) {

@@ -1,9 +1,9 @@
 import Color, { RadialGradient, LinearGradient } from "./Color.js";
 
 export default class Drawing {
-  roundRect(context, start, size, radius, color, fill, lineWidth) {
-    context.strokeStyle = color;
-    if (fill) context.fillStyle = color;
+  roundRect(context, start, size, radius, stroke, fill, lineWidth) {
+    context.strokeStyle = stroke;
+    if (fill) context.fillStyle = stroke;
     context.lineWidth = lineWidth;
 
     context.beginPath();

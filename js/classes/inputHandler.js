@@ -56,6 +56,13 @@ export default class InputHandler {
         mouseY <= 105
       ) {
         this.game.onMouseEvent(2);
+      } else if (
+        mouseX >= this.canvas.width - 70 &&
+        mouseX <= this.canvas.width - 50 &&
+        mouseY >= 120 &&
+        mouseY <= 135
+      ) {
+        this.game.onMouseEvent(3);
       }
     };
     window.addEventListener("click", reactToMousePress.bind(this));
