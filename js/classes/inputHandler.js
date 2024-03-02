@@ -42,7 +42,6 @@ export default class InputHandler {
     const reactToMousePress = (event) => {
       const mouseX = event.clientX - rect.left;
       const mouseY = event.clientY - rect.top;
-      // console.log(mouseX, mouseY);
       if (
         mouseX >= this.canvas.width - 70 &&
         mouseX <= this.canvas.width - 50 &&
@@ -50,8 +49,13 @@ export default class InputHandler {
         mouseY <= 75
       ) {
         this.game.onMouseEvent(1);
-      } else {
-        console.log("game is already");
+      } else if (
+        mouseX >= this.canvas.width - 70 &&
+        mouseX <= this.canvas.width - 50 &&
+        mouseY >= 90 &&
+        mouseY <= 105
+      ) {
+        this.game.onMouseEvent(2);
       }
     };
     window.addEventListener("click", reactToMousePress.bind(this));

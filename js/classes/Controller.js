@@ -4,6 +4,7 @@ export default class Controller {
   static faultTempCounter = 0;
   static wolfPoz;
   static isBunny;
+  static gameB = false;
   // static isStop = false;
 
   static setBunnyStatus(status) {
@@ -25,29 +26,32 @@ export default class Controller {
     let exclusiveIndex;
     let index;
 
-    switch (Controller.faultTempCounter) {
-      case 0:
-        exclusiveIndex = 1;
-        break;
-      case 0.5:
-      case 1:
-        exclusiveIndex = 3;
-        break;
-      case 1.5:
-      case 2:
-        exclusiveIndex = 0;
-        break;
-      case 2.5:
-      case 3:
-        exclusiveIndex = 2;
-        break;
-      case 3.5:
-        exclusiveIndex = undefined;
-    }
+    if (Controller.gameB === false) {
+      switch (Controller.faultTempCounter) {
+        case 0:
+          exclusiveIndex = 1;
+          break;
+        case 0.5:
+        case 1:
+          exclusiveIndex = 3;
+          break;
+        case 1.5:
+        case 2:
+          exclusiveIndex = 0;
+          break;
+        case 2.5:
+        case 3:
+          exclusiveIndex = 2;
+          break;
+      }
 
-    do {
+      do {
+        console.log(index, exclusiveIndex);
+        index = Math.floor(Math.random() * 4);
+      } while (index === exclusiveIndex);
+    } else {
       index = Math.floor(Math.random() * 4);
-    } while (index === exclusiveIndex);
+    }
     return index;
   }
 
@@ -109,7 +113,7 @@ export default class Controller {
         Controller.timeOfStatic *= 1.4;
       }
 
-      if (Controller.scoreCounter === 3 || Controller.scoreCounter === 500) {
+      if (Controller.scoreCounter === 200 || Controller.scoreCounter === 500) {
         Controller.faultTempCounter = 0;
         Controller.isStop = true;
       }

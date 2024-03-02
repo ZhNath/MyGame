@@ -103,7 +103,8 @@ export default class Game {
   }
 
   onMouseEvent(eventNumber) {
-    if (eventNumber === 1) this.animate();
+    this.animate();
+    if (eventNumber === 2) Controller.gameB = true;
   }
 
   animate(timeStamp) {

@@ -16,12 +16,6 @@ export default class FaultCounter {
   }
 
   draw(context, x, y) {
-    // context.beginPath();
-    // context.fillStyle = color;
-    // context.arc(x, y, 7, 0, Math.PI * 2);
-    // context.fill();
-    // context.closePath();
-
     this.live.src = "../../images/live.png";
     context.drawImage(this.live, x, y, 15, 15);
   }
