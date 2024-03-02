@@ -9,7 +9,6 @@ import ScoreCounter from "./ScoreCounter.js";
 import FaultCounter from "./FaultCounter.js";
 import Settings from "./Settings.js";
 import Controller from "./Controller.js";
-import { HalfEgg } from "./Drawing.js";
 import Glass from "./Glass.js";
 
 export default class Game {
@@ -29,23 +28,7 @@ export default class Game {
     new EggsBanks(423, 215, -1),
   ];
 
-  liveEgg = [[], [], []];
-  makeArrayEgg(x0, eggWidth, distance) {
-    for (let i = 0; i < 3; i++) {
-      this.liveEgg[i][0] = new HalfEgg(
-        x0 - i * distance,
-        170,
-        (Math.PI * 5) / 4,
-        0.7
-      );
-      this.liveEgg[i][1] = new HalfEgg(
-        x0 - eggWidth - i * distance,
-        170,
-        -Math.PI / 4,
-        0.7
-      );
-    }
-  }
+  liveEgg = new FaultCounter();
 
   inputHandler = new InputHandler(this);
   blinked = new FaultCounter(this.ctx, 250, 160);
@@ -58,11 +41,12 @@ export default class Game {
     this.canvas.width = Settings.canvas.width;
     this.canvas.height = Settings.canvas.height;
     this.ctx = this.canvas.getContext("2d");
+    this.inputHandler.setCanvasSize(this.canvas);
 
-    this.makeArrayEgg(370, 19, 32);
     this.inputHandler.addEventListener();
 
-    this.animate();
+    this.board.draw(this.ctx);
+    this.glass.draw(this.ctx);
   }
 
   update(timeStamp) {
@@ -100,17 +84,13 @@ export default class Game {
 
     ScoreCounter.draw(this.ctx, 110);
 
-    for (let i = 0; i < 3; i++) {
-      this.liveEgg[i][0].drawUp(this.ctx, Color.screen.shadow);
+    // for (let i = 0; i < 3; i++) {
 
-      this.liveEgg[i][1].drawBottom(this.ctx, Color.screen.shadow);
-    }
+    // }
 
     for (let i = 0; i < this.blinked.faultCounter; i++) {
       if (this.blinked.faultCounter <= 3) {
-        this.liveEgg[i][0].drawUp(this.ctx, "black");
-
-        this.liveEgg[i][1].drawBottom(this.ctx, "black");
+        this.liveEgg.draw(this.ctx, 347 - i * 16, 150);
       }
     }
 
@@ -120,6 +100,10 @@ export default class Game {
   onInputEvent(buttonNumber) {
     this.wolf.setPosition(buttonNumber);
     Controller.setWolfPoz(buttonNumber);
+  }
+
+  onMouseEvent(eventNumber) {
+    if (eventNumber === 1) this.animate();
   }
 
   animate(timeStamp) {

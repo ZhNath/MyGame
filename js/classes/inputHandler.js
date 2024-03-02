@@ -3,6 +3,12 @@ export default class InputHandler {
     this.game = game;
   }
 
+  setCanvasSize(canvas) {
+    this.canvas = canvas;
+    console.log(this.canvas.width);
+    console.log(this.canvas.height);
+  }
+
   addEventListener() {
     const UL = "r";
     const LL = "f";
@@ -29,5 +35,25 @@ export default class InputHandler {
           break;
       }
     });
+
+    const rect = this.canvas.getBoundingClientRect();
+    console.log(rect);
+
+    const reactToMousePress = (event) => {
+      const mouseX = event.clientX - rect.left;
+      const mouseY = event.clientY - rect.top;
+      // console.log(mouseX, mouseY);
+      if (
+        mouseX >= this.canvas.width - 70 &&
+        mouseX <= this.canvas.width - 50 &&
+        mouseY >= 60 &&
+        mouseY <= 75
+      ) {
+        this.game.onMouseEvent(1);
+      } else {
+        console.log("game is already");
+      }
+    };
+    window.addEventListener("click", reactToMousePress.bind(this));
   }
 }
