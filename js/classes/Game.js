@@ -28,7 +28,7 @@ export default class Game {
     new EggsBanks(423, 215, -1),
   ];
 
-  liveEgg = new FaultCounter();
+  liveEgg = new FaultCounter(this.ctx, 250, 160);
 
   inputHandler = new InputHandler(this);
   blinked = new FaultCounter(this.ctx, 250, 160);
@@ -63,9 +63,9 @@ export default class Game {
 
     ScoreCounter.setScoreCount(Controller.scoreCounter);
 
-    this.blinked.setFaultCounter(Controller.faultTempCounter);
+    this.liveEgg.setFaultCounter(Controller.faultTempCounter);
 
-    this.blinked.update(timeStamp);
+    this.liveEgg.update(timeStamp);
   }
 
   draw() {
@@ -84,12 +84,12 @@ export default class Game {
 
     ScoreCounter.draw(this.ctx, 110);
 
-    // for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
+      this.liveEgg.draw_shadow(this.ctx, 347 - i * 16, 150);
+    }
 
-    // }
-
-    for (let i = 0; i < this.blinked.faultCounter; i++) {
-      if (this.blinked.faultCounter <= 3) {
+    for (let i = 0; i < this.liveEgg.faultCounter; i++) {
+      if (this.liveEgg.faultCounter <= 3) {
         this.liveEgg.draw(this.ctx, 347 - i * 16, 150);
       }
     }

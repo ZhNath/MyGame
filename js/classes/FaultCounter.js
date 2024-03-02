@@ -8,6 +8,7 @@ export default class FaultCounter {
     this.delay;
     this.flag = 0;
     this.live = new Image();
+    this.live_shadow = new Image();
   }
   color;
 
@@ -15,8 +16,13 @@ export default class FaultCounter {
     this.faultTempCounter = faultTempCounter;
   }
 
+  draw_shadow(context, x, y) {
+    this.live_shadow.src = "../../images/live_shadow.svg";
+    context.drawImage(this.live_shadow, x, y, 15, 15);
+  }
+
   draw(context, x, y) {
-    this.live.src = "../../images/live.png";
+    this.live.src = "../../images/live.svg";
     context.drawImage(this.live, x, y, 15, 15);
   }
 
