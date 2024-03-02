@@ -43,7 +43,7 @@ export default class Board {
         10,
         "black",
         false,
-        2
+        3
       );
 
       this.settings.roundRect(

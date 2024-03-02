@@ -46,7 +46,7 @@ export default class Glass {
     context.drawImage(this.chicken3, 158, 200, 30, 30);
 
     this.chicken4.src = "../../images/chicken4.svg";
-    context.drawImage(this.chicken4, 415, 140, 30, 30);
+    context.drawImage(this.chicken4, 410, 135, 35, 35);
 
     this.chicken2.src = "../../images/chicken2.svg";
     context.drawImage(this.chicken2, 415, 200, 30, 30);

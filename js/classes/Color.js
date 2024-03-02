@@ -1,5 +1,5 @@
 export default class Color {
-  static background = "gray";
+  static background = "rgb(237, 56, 57)";
   static box = {
     basic: "#d9ad9f",
     light1: "#efd5ce",
