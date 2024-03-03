@@ -167,32 +167,29 @@ export default class Board {
     intBorder();
 
     const buttons = () => {
-      let buttonUL = new RedButton(70, 320, 10);
-      let buttonLL = new RedButton(70, 220, 10);
-      let buttonUR = new RedButton(this.width - 70, 320, 10);
-      let buttonLR = new RedButton(this.width - 70, 220, 10);
+      let buttons = [
+        new RedButton(70, 320, 10),
+        new RedButton(70, 220, 10),
+        new RedButton(this.width - 70, 320, 10),
+        new RedButton(this.width - 70, 220, 10),
+      ];
 
-      buttonUL.draw(context);
-      buttonLL.draw(context);
-      buttonUR.draw(context);
-      buttonLR.draw(context);
+      buttons.forEach((button) => {
+        button.draw(context);
+      });
 
-      let triangleUL = new Triangle(context, 25, 210);
-      triangleUL.rotation(-Math.PI / 4);
-      triangleUL.draw();
-
-      let triangleLL = new Triangle(context, 25, 390);
-      triangleLL.rotation((Math.PI * 5) / 4);
-      triangleLL.draw();
-
-      let triangleUR = new Triangle(context, this.width - 35, 210);
-      triangleUR.rotation(Math.PI / 4);
-      triangleUR.draw();
-
-      let triangleLR = new Triangle(context, this.width - 35, 390);
-      triangleLR.rotation((-Math.PI * 5) / 4);
-      triangleLR.draw();
-      context.restore();
+      let triangles = [
+        new Triangle(25, 210, 1),
+        new Triangle(this.width - 35, 210, 1),
+        new Triangle(this.width - 35, 390, 1),
+        new Triangle(25, 390, 1),
+      ];
+      for (let i = 0; i < 4; i++) {
+        context.save();
+        triangles[i].rotation(context, -Math.PI / 4 + (i * Math.PI) / 2);
+        triangles[i].draw(context);
+        context.restore();
+      }
     };
     buttons();
 
@@ -205,10 +202,10 @@ export default class Board {
       buttonGray2.draw();
       buttonGray3.draw();
 
-      context.font = "8px "; // Задаем шрифт и размер текста
-      context.fillStyle = "black"; // Задаем цвет текста
-      context.fillText("Game A", this.width - 72, 85);
-      context.fillText("Game B", this.width - 72, 115);
+      context.font = "10px Arial";
+      context.fillStyle = "black";
+      context.fillText("Game A", this.width - 75, 85);
+      context.fillText("Game B", this.width - 75, 115);
       context.fillText("Menu", this.width - 68, 145);
     };
 

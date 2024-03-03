@@ -129,27 +129,26 @@ export class RedButton {
 }
 
 export class Triangle {
-  constructor(context, x, y) {
-    this.context = context;
+  constructor(x, y, k) {
     this.x = x;
     this.y = y;
+    this.k = k;
   }
-  draw() {
-    this.context.fillStyle = "black";
-    this.context.beginPath();
-    this.context.moveTo(this.x, this.y);
-    this.context.lineTo(this.x + 10, this.y);
-    this.context.lineTo(this.x + 5, this.y - 30);
-    this.context.closePath();
-    this.context.fill();
+  // k=1 for Big Triangle and k=0,5 for Small Triangle
+  draw(context) {
+    context.fillStyle = "black";
+    context.beginPath();
+    context.moveTo(this.x, this.y);
+    context.lineTo(this.x + 10 * this.k, this.y);
+    context.lineTo(this.x + 5 * this.k, this.y - 30 * this.k);
+    context.closePath();
+    context.fill();
   }
 
-  rotation(alfa) {
-    this.context.restore();
-    this.context.save();
-    this.context.translate(this.x + 5, this.y - 30);
-    this.context.rotate(alfa);
-    this.context.translate(-(this.x + 5), -(this.y - 30));
+  rotation(context, alfa) {
+    context.translate(this.x + 5 * this.k, this.y - 30 * this.k);
+    context.rotate(alfa);
+    context.translate(-(this.x + 5 * this.k), -(this.y - 30 * this.k));
   }
 }
 

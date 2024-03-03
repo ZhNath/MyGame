@@ -4,13 +4,14 @@ import Player from "./Player.js";
 import Bunny from "./Bunny.js";
 import InputHandler from "./inputHandler.js";
 import Num from "./Numbers.js";
-import Color from "./Color.js";
+import Color, { LinearGradient } from "./Color.js";
 import ScoreCounter from "./ScoreCounter.js";
 import FaultCounter from "./FaultCounter.js";
 import Settings from "./Settings.js";
 import Controller from "./Controller.js";
 import Glass from "./Glass.js";
 import Menu from "./Menu.js";
+import Drawing from "./Drawing.js";
 
 export default class Game {
   canvas;
@@ -22,6 +23,8 @@ export default class Game {
   board = new Board(this);
   glass = new Glass(this);
   menu = new Menu();
+
+  rect = new Drawing();
 
   eggBank = [
     new EggsBanks(177, 153.9, 1),
@@ -37,6 +40,7 @@ export default class Game {
   controller = new Controller();
 
   pastTime = 0;
+  isMenuPressed = true;
 
   start() {
     this.canvas = document.getElementById("2d-canvas");
@@ -52,10 +56,6 @@ export default class Game {
   }
 
   update(timeStamp) {
-    // if (Controller.isStop) {
-    //   this.blinked.updateWhenStop(timeStamp);
-    // }
-
     Controller.update(timeStamp);
 
     EggsBanks.setPlayEggs(Controller.playEggs);
@@ -72,7 +72,7 @@ export default class Game {
 
   draw() {
     this.board.draw(this.ctx);
-
+    // this.setGameKeys(this.keys);
     for (let i = 0; i < 4; i++) {
       this.eggBank[i].draw(this.ctx, i);
     }
@@ -104,9 +104,19 @@ export default class Game {
     Controller.setWolfPoz(buttonNumber);
   }
 
+  setGameKeys(keys) {
+    this.menu.setKeys(keys);
+  }
+
   onMouseEvent(eventNumber) {
-    if (eventNumber === 3) this.menu.draw(this.ctx);
-    else {
+    if (eventNumber === 3 && this.isMenuPressed === true) {
+      this.menu.draw(this.ctx);
+      this.isMenuPressed = false;
+    } else if (eventNumber === 3 && this.isMenuPressed === false) {
+      this.isMenuPressed = true;
+      this.board.draw(this.ctx);
+      this.glass.draw(this.ctx);
+    } else {
       this.animate();
       if (eventNumber === 2) Controller.gameB = true;
     }

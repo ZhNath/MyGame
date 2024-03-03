@@ -1,35 +1,31 @@
 export default class InputHandler {
   constructor(game) {
     this.game = game;
+    this.keyBoardKeys = ["r", "f", "u", "j"];
   }
 
   setCanvasSize(canvas) {
     this.canvas = canvas;
-    console.log(this.canvas.width);
-    console.log(this.canvas.height);
   }
 
   addEventListener() {
-    const UL = "r";
-    const LL = "f";
-    const UR = "u";
-    const LR = "j";
+    this.game.setGameKeys(this.keyBoardKeys);
 
     window.addEventListener("keydown", (keyEvent) => {
       switch (keyEvent.key) {
-        case UL:
+        case this.keyBoardKeys[0]:
           this.game.onInputEvent(1);
           break;
 
-        case LL:
+        case this.keyBoardKeys[1]:
           this.game.onInputEvent(2);
 
           break;
-        case UR:
+        case this.keyBoardKeys[2]:
           this.game.onInputEvent(3);
 
           break;
-        case LR:
+        case this.keyBoardKeys[3]:
           this.game.onInputEvent(4);
 
           break;
@@ -63,6 +59,35 @@ export default class InputHandler {
         mouseY <= 135
       ) {
         this.game.onMouseEvent(3);
+        // menu red buttons
+      } else if (
+        mouseX >= 270 &&
+        mouseX <= 280 &&
+        mouseY >= 140 &&
+        mouseY <= 160
+      ) {
+        console.log("mouse1");
+      } else if (
+        mouseX >= 270 &&
+        mouseX <= 280 &&
+        mouseY >= 180 &&
+        mouseY <= 200
+      ) {
+        console.log("mouse2");
+      } else if (
+        mouseX >= 270 &&
+        mouseX <= 280 &&
+        mouseY >= 220 &&
+        mouseY <= 240
+      ) {
+        console.log("mouse3");
+      } else if (
+        mouseX >= 270 &&
+        mouseX <= 280 &&
+        mouseY >= 260 &&
+        mouseY <= 280
+      ) {
+        console.log("mouse4");
       }
     };
     window.addEventListener("click", reactToMousePress.bind(this));
