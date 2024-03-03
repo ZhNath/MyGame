@@ -36,7 +36,7 @@ export default class Game {
   liveEgg = new FaultCounter(this.ctx, 250, 160);
 
   inputHandler = new InputHandler(this);
-  blinked = new FaultCounter(this.ctx, 250, 160);
+  // blinked = new FaultCounter(this.ctx, 250, 160);
   controller = new Controller();
 
   pastTime = 0;
@@ -57,7 +57,13 @@ export default class Game {
   }
 
   update(timeStamp) {
-    Controller.update(timeStamp);
+    if (Controller.isStop[0] === false) {
+      Controller.update(timeStamp);
+    }
+
+    if (Controller.isStop[0] === true) {
+      this.liveEgg.updateWhenStop(timeStamp);
+    }
 
     EggsBanks.setPlayEggs(Controller.playEggs);
 

@@ -1,3 +1,5 @@
+import Controller from "./Controller.js";
+
 export default class FaultCounter {
   constructor(context, x, y) {
     this.context = context;
@@ -6,7 +8,6 @@ export default class FaultCounter {
     this.pastTime = 0;
     this.past2Time = 0;
     this.delay;
-    this.flag = 0;
     this.live = new Image();
     this.live_shadow = new Image();
   }
@@ -38,13 +39,18 @@ export default class FaultCounter {
       this.pastTime = realTime;
     }
   }
+  counter = 0;
 
-  updateWhenStop(realTime = 0) {
-    let delta = realTime - this.past2Time;
-
-    if (delta > 250) {
+  updateWhenStop(realTime) {
+    let delta = realTime - this.pastTime;
+    if (delta > 500) {
       this.faultCounter = this.faultCounter === 3 ? 0 : 3;
-      this.past2Time = realTime;
+      this.pastTime = realTime;
+      this.counter++;
+    }
+    if (this.counter === 6) {
+      Controller.isStop[0] = false;
+      this.counter = 0;
     }
   }
 }

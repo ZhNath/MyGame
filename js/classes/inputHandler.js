@@ -27,7 +27,6 @@ export default class InputHandler {
   }
 
   addEventListener() {
-    console.log(Settings.keyBoardKeys[0]);
     window.addEventListener("keydown", (keyEvent) => {
       switch (keyEvent.key) {
         case Settings.keyBoardKeys[0]:

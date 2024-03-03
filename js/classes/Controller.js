@@ -5,7 +5,7 @@ export default class Controller {
   static wolfPoz;
   static isBunny;
   static gameB = false;
-  // static isStop = false;
+  static isStop = [false, false];
 
   static setBunnyStatus(status) {
     Controller.isBunny = status;
@@ -46,7 +46,6 @@ export default class Controller {
       }
 
       do {
-        console.log(index, exclusiveIndex);
         index = Math.floor(Math.random() * 4);
       } while (index === exclusiveIndex);
     } else {
@@ -113,10 +112,21 @@ export default class Controller {
         Controller.timeOfStatic *= 1.4;
       }
 
-      if (Controller.scoreCounter === 200 || Controller.scoreCounter === 500) {
+      if (Controller.scoreCounter === 3 || Controller.scoreCounter === 10) {
         Controller.faultTempCounter = 0;
-        Controller.isStop = true;
+
+        if (Controller.isStop[1] === false) {
+          Controller.playEggs.length = 0;
+          Controller.isStop[0] = true;
+        }
+
+        Controller.isStop[1] = true;
       }
+
+      if (Controller.scoreCounter === 4) {
+        Controller.isStop[1] = false;
+      }
+
       Controller.pastTime = realTime;
     }
   }
