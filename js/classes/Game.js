@@ -48,6 +48,7 @@ export default class Game {
     this.canvas.height = Settings.canvas.height;
     this.ctx = this.canvas.getContext("2d");
     this.inputHandler.setCanvasSize(this.canvas);
+    this.menu.init(this.canvas);
 
     this.inputHandler.addEventListener();
 
@@ -72,7 +73,6 @@ export default class Game {
 
   draw() {
     this.board.draw(this.ctx);
-    // this.setGameKeys(this.keys);
     for (let i = 0; i < 4; i++) {
       this.eggBank[i].draw(this.ctx, i);
     }
@@ -104,11 +104,11 @@ export default class Game {
     Controller.setWolfPoz(buttonNumber);
   }
 
-  setGameKeys(keys) {
-    this.menu.setKeys(keys);
-  }
-
   onMouseEvent(eventNumber) {
+    this.menu.input.forEach((input) => {
+      input.style.display = "none";
+    });
+
     if (eventNumber === 3 && this.isMenuPressed === true) {
       this.menu.draw(this.ctx);
       this.isMenuPressed = false;
@@ -116,9 +116,13 @@ export default class Game {
       this.isMenuPressed = true;
       this.board.draw(this.ctx);
       this.glass.draw(this.ctx);
-    } else {
+    } else if (eventNumber === 1 || eventNumber === 2) {
       this.animate();
       if (eventNumber === 2) Controller.gameB = true;
+    }
+
+    if (eventNumber > 3 && eventNumber <= 7) {
+      this.menu.inputs(eventNumber - 4);
     }
   }
 
