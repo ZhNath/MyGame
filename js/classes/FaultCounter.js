@@ -9,7 +9,9 @@ export default class FaultCounter {
     this.past2Time = 0;
     this.delay;
     this.live = new Image();
+    this.live.src = "../../images/live.svg";
     this.live_shadow = new Image();
+    this.live_shadow.src = "../../images/live_shadow.svg";
   }
   color;
 
@@ -18,12 +20,10 @@ export default class FaultCounter {
   }
 
   draw_shadow(context, x, y) {
-    this.live_shadow.src = "../../images/live_shadow.svg";
     context.drawImage(this.live_shadow, x, y, 15, 15);
   }
 
   draw(context, x, y) {
-    this.live.src = "../../images/live.svg";
     context.drawImage(this.live, x, y, 15, 15);
   }
 

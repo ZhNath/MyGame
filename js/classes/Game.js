@@ -3,8 +3,6 @@ import Board from "./Board.js";
 import Player from "./Player.js";
 import Bunny from "./Bunny.js";
 import InputHandler from "./inputHandler.js";
-import Num from "./Numbers.js";
-import Color, { LinearGradient } from "./Color.js";
 import ScoreCounter from "./ScoreCounter.js";
 import FaultCounter from "./FaultCounter.js";
 import Settings from "./Settings.js";
@@ -12,16 +10,19 @@ import Controller from "./Controller.js";
 import Glass from "./Glass.js";
 import Menu from "./Menu.js";
 import Drawing from "./Drawing.js";
+import ShadowLayer from "./ShadowLayer.js";
 
 export default class Game {
   canvas;
   ctx;
   animationGlobal;
   wolf = new Player(this);
-
   bunny = new Bunny();
+
   board = new Board(this);
+  shadowLayer = new ShadowLayer(this);
   glass = new Glass(this);
+
   menu = new Menu();
 
   rect = new Drawing();
@@ -36,7 +37,6 @@ export default class Game {
   liveEgg = new FaultCounter(this.ctx, 250, 160);
 
   inputHandler = new InputHandler(this);
-  // blinked = new FaultCounter(this.ctx, 250, 160);
   controller = new Controller();
 
   pastTime = 0;
@@ -53,6 +53,7 @@ export default class Game {
     this.inputHandler.addEventListener();
 
     this.board.draw(this.ctx);
+    this.shadowLayer.draw(this.ctx);
     this.glass.draw(this.ctx);
   }
 
@@ -79,16 +80,14 @@ export default class Game {
 
   draw() {
     this.board.draw(this.ctx);
+    this.shadowLayer.draw(this.ctx);
+
     for (let i = 0; i < 4; i++) {
       this.eggBank[i].draw(this.ctx, i);
     }
 
     this.wolf.draw(this.ctx);
     this.bunny.draw(this.ctx);
-
-    for (let i = 0; i < 4; i++) {
-      Num.drawShadowNum(this.ctx, 300 + 16 * i, 110, Color.screen.shadow);
-    }
 
     ScoreCounter.draw(this.ctx, 110);
 

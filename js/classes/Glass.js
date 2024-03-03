@@ -49,7 +49,7 @@ export default class Glass {
     context.drawImage(this.chicken[3], 410, 135, 35, 35);
     context.drawImage(this.chicken[1], 415, 200, 30, 30);
 
-    context.drawImage(this.grass, 160, 283, 280, 20);
+    // context.drawImage(this.grass, 160, 283, 280, 20);
 
     context.shadowColor = "transparent";
     context.shadowBlur = 0;
