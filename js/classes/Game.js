@@ -136,6 +136,8 @@ export default class Game {
   animate(timeStamp) {
     this.update(timeStamp);
     this.draw();
+    this.fallingEgg.update(timeStamp);
+
     requestAnimationFrame((timeStamp) => this.animate(timeStamp));
   }
 }

@@ -20,9 +20,10 @@ export default class FallingEggs {
 
     this.poz = 0;
   }
-  // 230, 280, 30, 15
+
   draw(context) {
     if (Controller.isFall) {
+      console.log("Controller");
       context.drawImage(
         this.faultEggs[this.poz][0],
         this.faultEggs[this.poz][1],
@@ -36,16 +37,23 @@ export default class FallingEggs {
   update(realTime) {
     let delta = realTime - this.pastTime;
 
-    if (delta > 2500) {
-      Controller.isFall = false;
+    if (!Controller.isBunny) {
+      if (delta > 2500) {
+        Controller.isFall = false;
+        this.pastTime = realTime;
+      }
     }
 
-    if (delta > 500) {
-      if (Controller.isBunny) {
+    if (Controller.isBunny && Controller.isFall) {
+      if (delta > 400) {
         this.poz++;
+        if (this.poz === 5) {
+          Controller.isFall = false;
+          Controller.isBunny = false;
+          this.poz = 0;
+        }
+        this.pastTime = realTime;
       }
-      this.pastTime = realTime;
-      Controller.isFall = false;
     }
   }
 }
