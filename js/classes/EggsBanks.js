@@ -33,9 +33,9 @@ export default class EggsBanks {
   }
 
   draw(context, index) {
-    this.drawEggs.forEach((egg) => {
-      egg.draw(context, this.passiveColor);
-    });
+    for (let i = 0; i < this.drawEggs.length - 1; i++) {
+      this.drawEggs[i].draw(context, this.passiveColor);
+    }
 
     EggsBanks.playEggs.forEach((poz) => {
       if (poz[1] === index) this.drawEggs[poz[0]].draw(context, "black");

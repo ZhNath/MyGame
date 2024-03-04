@@ -54,6 +54,7 @@ export default class Game {
 
     this.board.draw(this.ctx);
     this.shadowLayer.draw(this.ctx);
+
     this.glass.draw(this.ctx);
   }
 
@@ -66,9 +67,10 @@ export default class Game {
       this.liveEgg.updateWhenStop(timeStamp);
     }
 
+    this.bunny.update(timeStamp, this.ctx);
+
     EggsBanks.setPlayEggs(Controller.playEggs);
 
-    this.bunny.update(timeStamp);
     Controller.setBunnyStatus(this.bunny.isBunny);
 
     ScoreCounter.setScoreCount(Controller.scoreCounter);
@@ -90,10 +92,6 @@ export default class Game {
     this.bunny.draw(this.ctx);
 
     ScoreCounter.draw(this.ctx, 110);
-
-    for (let i = 0; i < 3; i++) {
-      this.liveEgg.draw_shadow(this.ctx, 347 - i * 16, 150);
-    }
 
     for (let i = 0; i < this.liveEgg.faultCounter; i++) {
       if (this.liveEgg.faultCounter <= 3) {

@@ -1,29 +1,52 @@
-import EggsBanks from "./EggsBanks.js";
-import Board from "./Board.js";
-import Player from "./Player.js";
-import Bunny from "./Bunny.js";
-import InputHandler from "./inputHandler.js";
 import Num from "./Numbers.js";
 import Color, { LinearGradient } from "./Color.js";
-import ScoreCounter from "./ScoreCounter.js";
 import FaultCounter from "./FaultCounter.js";
-import Settings from "./Settings.js";
-import Controller from "./Controller.js";
-import Glass from "./Glass.js";
-import Menu from "./Menu.js";
-import Drawing from "./Drawing.js";
 
 export default class ShadowLayer {
   constructor() {
     this.fall1_shadow = new Image();
-    this.live_shadow = new Image();
+    this.fall2_shadow = new Image();
+    // this.fall3_shadow = new Image();
+    // this.fall4_shadow = new Image();
+    // this.fall5_shadow = new Image();
+
     this.fall1_shadow.src = "../../images/1fall _shadow.svg";
+    this.fall2_shadow.src = "../../images/2fall_shadow.svg";
+    // this.fall3_shadow.src = "../../images/3fall_shadow.svg";
+    // this.fall4_shadow.src = "../../images/4fall_shadow.svg";
+    // this.fall5_shadow.src = "../../images/5fall_shadow.svg";
+
+    this.bunny_shadow = new Image();
+    this.bunny_shadow.src = "../../images/rabbit_shadow.svg";
+
+    this.live_shadow = new FaultCounter();
   }
+
   draw(context) {
-    context.drawImage(this.fall1_shadow, 220, 280, 40, 20);
-    context.drawImage(this.fall1_shadow, 340, 280, 40, 20);
+    let x1 = 230;
+    let x2 = 345;
+
+    context.drawImage(this.fall1_shadow, x1, 280, 30, 15);
+    context.drawImage(this.fall1_shadow, x2, 280, 30, 15);
+
+    context.drawImage(this.fall2_shadow, x1 - 20, 270, 15, 15);
+    context.drawImage(this.fall2_shadow, x2 + 20, 270, 15, 15);
+
+    // context.drawImage(this.fall1_shadow, x2, 280, 40, 20);
+    // context.drawImage(this.fall1_shadow, x2, 280, 40, 20);
+
+    // context.drawImage(this.fall1_shadow, x2, 280, 40, 20);
+    // context.drawImage(this.fall1_shadow, x2, 280, 40, 20);
+    // context.drawImage(this.fall1_shadow, x2, 280, 40, 20);
+    // context.drawImage(this.fall1_shadow, x2, 280, 40, 20);
+
+    context.drawImage(this.bunny_shadow, 215, 100, 80, 70);
     for (let i = 0; i < 4; i++) {
       Num.drawShadowNum(context, 300 + 16 * i, 110, Color.screen.shadow);
+    }
+
+    for (let i = 0; i < 3; i++) {
+      this.live_shadow.draw_shadow(context, 347 - i * 16, 150);
     }
   }
 }

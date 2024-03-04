@@ -99,10 +99,13 @@ export default class Controller {
           }
         }
       }
-
+      //***************speed
+      console.log(Controller.timeOfStatic);
       if (
         Controller.scoreCounter % 100 === 0 &&
         Controller.scoreCounter !== 0 &&
+        Controller.scoreCounter !== 200 &&
+        Controller.scoreCounter !== 500 &&
         Controller.scoreCounter !== 700
       ) {
         Controller.timeOfStatic *= 1.2;
@@ -113,6 +116,7 @@ export default class Controller {
       }
 
       if (Controller.scoreCounter === 200 || Controller.scoreCounter === 500) {
+        Controller.timeOfStatic *= 1.5 ** (1 / 6);
         if (Controller.isStop[1] === false) {
           Controller.faultTempCounter = 0;
           Controller.playEggs.length = 0;

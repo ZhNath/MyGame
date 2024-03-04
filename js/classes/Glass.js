@@ -11,6 +11,7 @@ export default class Glass {
     this.settings = new Drawing();
     this.width = Settings.canvas.width;
     this.height = Settings.canvas.height;
+
     this.chicken = [new Image(), new Image(), new Image(), new Image()];
 
     this.chicken[0].src = "../../images/chicken1.svg";

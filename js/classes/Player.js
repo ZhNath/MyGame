@@ -15,6 +15,11 @@ export default class Player {
       (this.playerRT = new Image()),
       (this.playerRB = new Image()),
     ];
+
+    this.playerLT.src = "../../images/WolfLT.png";
+    this.playerLB.src = "../../images/WolfLB.png";
+    this.playerRT.src = "../../images/WolfRT.png";
+    this.playerRB.src = "../../images/WolfRB.png";
   }
 
   setPosition(position) {
@@ -24,11 +29,6 @@ export default class Player {
   update() {}
 
   draw(context) {
-    this.playerLT.src = "../../images/WolfLT.png";
-    this.playerLB.src = "../../images/WolfLB.png";
-    this.playerRT.src = "../../images/WolfRT.png";
-    this.playerRB.src = "../../images/WolfRB.png";
-
     let x = this.positions[this.position - 1][0];
     let y = this.positions[this.position - 1][1];
 
