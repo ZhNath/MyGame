@@ -62,6 +62,7 @@ export default class Controller {
   static pastTime = 0;
   static timeOfStatic = 500;
   static refreshedTimes = 0;
+  static isGameOver = false;
 
   static update(realTime) {
     //     *****
@@ -75,6 +76,8 @@ export default class Controller {
     let delta = realTime - Controller.pastTime;
 
     if (delta > Controller.timeOfStatic) {
+      if (Controller.faultTempCounter >= 3) Controller.isGameOver = true;
+
       for (let i = 0; i < Controller.playEggs.length; i++) {
         Controller.playEggs[i][0]++;
       }
@@ -121,7 +124,7 @@ export default class Controller {
       }
 
       if (Controller.scoreCounter === 700) {
-        Controller.timeOfStatic *= 1.4;
+        Controller.timeOfStatic *= 1.4 ** (1 / 6);
       }
 
       if (Controller.scoreCounter === 200 || Controller.scoreCounter === 500) {

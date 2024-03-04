@@ -22,9 +22,7 @@ export default class Game {
   board = new Board(this);
   shadowLayer = new ShadowLayer(this);
   glass = new Glass(this);
-
   menu = new Menu();
-
   rect = new Drawing();
 
   eggBank = [
@@ -35,7 +33,6 @@ export default class Game {
   ];
 
   fallingEgg = new FallingEggs(this);
-
   liveEgg = new FaultCounter(this.ctx, 250, 160);
 
   inputHandler = new InputHandler(this);
@@ -55,8 +52,13 @@ export default class Game {
 
     this.board.draw(this.ctx);
     this.shadowLayer.draw(this.ctx);
-
     this.glass.draw(this.ctx);
+  }
+  startGame() {
+    Controller.playEggs.length = 0;
+    Controller.scoreCounter = 0;
+    Controller.faultTempCounter = 0;
+    Controller.isGameOver = false;
   }
 
   update(timeStamp) {
@@ -79,7 +81,6 @@ export default class Game {
     this.liveEgg.setFaultCounter(Controller.faultTempCounter);
 
     this.liveEgg.update(timeStamp);
-    // this.fallingEgg.update(timeStamp);
   }
 
   draw() {
@@ -124,6 +125,7 @@ export default class Game {
       this.board.draw(this.ctx);
       this.glass.draw(this.ctx);
     } else if (eventNumber === 1 || eventNumber === 2) {
+      this.startGame();
       this.animate();
       if (eventNumber === 2) Controller.gameB = true;
     }
@@ -137,7 +139,8 @@ export default class Game {
     this.update(timeStamp);
     this.draw();
     this.fallingEgg.update(timeStamp);
-
-    requestAnimationFrame((timeStamp) => this.animate(timeStamp));
+    if (!Controller.isGameOver) {
+      requestAnimationFrame((timeStamp) => this.animate(timeStamp));
+    }
   }
 }
