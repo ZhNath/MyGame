@@ -103,7 +103,7 @@ export default class Controller {
             Controller.isFall = true;
             Controller.faultTempCounter += Controller.isBunny ? 0.5 : 1;
             Controller.playEggs.length = 0;
-            realTime += 200;
+            realTime += 2500;
           }
         }
       }

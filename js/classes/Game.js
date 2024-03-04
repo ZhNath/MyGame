@@ -79,8 +79,7 @@ export default class Game {
     this.liveEgg.setFaultCounter(Controller.faultTempCounter);
 
     this.liveEgg.update(timeStamp);
-
-    this.fallingEgg.update1(timeStamp, 0);
+    // this.fallingEgg.update(timeStamp);
   }
 
   draw() {
@@ -91,12 +90,12 @@ export default class Game {
       this.eggBank[i].draw(this.ctx, i);
     }
 
-    this.fallingEgg.draw(this.ctx);
-
     this.wolf.draw(this.ctx);
     this.bunny.draw(this.ctx);
 
     ScoreCounter.draw(this.ctx, 110);
+
+    this.fallingEgg.draw(this.ctx);
 
     for (let i = 0; i < this.liveEgg.faultCounter; i++) {
       if (this.liveEgg.faultCounter <= 3) {
@@ -106,30 +105,6 @@ export default class Game {
 
     this.glass.draw(this.ctx);
   }
-
-  // cartoon() {
-  //   if (Controller.isFall) {
-  //     if (!Controller.isBunny) {
-  //       this.fallingEgg.cartoon(this.ctx, 0);
-
-  //       setTimeout(() => {
-  //         Controller.isFall = false;
-  //       }, 1500);
-  //     } else {
-  //       this.fallingEgg.faultEggs[i]
-  //       this.fallingEgg.cartoon(this.ctx, i);
-  //       setInterval((i) => {
-  //         i++;
-  //       }, 500);
-  //       this.fallingEgg.cartoon(this.ctx, i);
-
-  //       // for (let i = 0; i < 5; i++) {
-  //       //   setTimeout(() => {
-  //       //     this.fallingEgg.cartoon(this.ctx, i);
-  //       //   }, 300);
-  //     }
-  //   }
-  // }
 
   onInputEvent(buttonNumber) {
     this.wolf.setPosition(buttonNumber);
@@ -161,7 +136,6 @@ export default class Game {
   animate(timeStamp) {
     this.update(timeStamp);
     this.draw();
-    // this.cartoon();
     requestAnimationFrame((timeStamp) => this.animate(timeStamp));
   }
 }
