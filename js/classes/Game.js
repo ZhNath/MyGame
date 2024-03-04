@@ -11,11 +11,11 @@ import Glass from "./Glass.js";
 import Menu from "./Menu.js";
 import Drawing from "./Drawing.js";
 import ShadowLayer from "./ShadowLayer.js";
+import FallingEggs from "./FallingEggs.js";
 
 export default class Game {
   canvas;
   ctx;
-  animationGlobal;
   wolf = new Player(this);
   bunny = new Bunny();
 
@@ -34,6 +34,8 @@ export default class Game {
     new EggsBanks(423, 215, -1),
   ];
 
+  fallingEgg = new FallingEggs(this);
+
   liveEgg = new FaultCounter(this.ctx, 250, 160);
 
   inputHandler = new InputHandler(this);
@@ -49,7 +51,6 @@ export default class Game {
     this.ctx = this.canvas.getContext("2d");
     this.inputHandler.setCanvasSize(this.canvas);
     this.menu.init(this.canvas);
-
     this.inputHandler.addEventListener();
 
     this.board.draw(this.ctx);
@@ -78,6 +79,8 @@ export default class Game {
     this.liveEgg.setFaultCounter(Controller.faultTempCounter);
 
     this.liveEgg.update(timeStamp);
+
+    this.fallingEgg.update1(timeStamp, 0);
   }
 
   draw() {
@@ -87,6 +90,8 @@ export default class Game {
     for (let i = 0; i < 4; i++) {
       this.eggBank[i].draw(this.ctx, i);
     }
+
+    this.fallingEgg.draw(this.ctx);
 
     this.wolf.draw(this.ctx);
     this.bunny.draw(this.ctx);
@@ -101,6 +106,30 @@ export default class Game {
 
     this.glass.draw(this.ctx);
   }
+
+  // cartoon() {
+  //   if (Controller.isFall) {
+  //     if (!Controller.isBunny) {
+  //       this.fallingEgg.cartoon(this.ctx, 0);
+
+  //       setTimeout(() => {
+  //         Controller.isFall = false;
+  //       }, 1500);
+  //     } else {
+  //       this.fallingEgg.faultEggs[i]
+  //       this.fallingEgg.cartoon(this.ctx, i);
+  //       setInterval((i) => {
+  //         i++;
+  //       }, 500);
+  //       this.fallingEgg.cartoon(this.ctx, i);
+
+  //       // for (let i = 0; i < 5; i++) {
+  //       //   setTimeout(() => {
+  //       //     this.fallingEgg.cartoon(this.ctx, i);
+  //       //   }, 300);
+  //     }
+  //   }
+  // }
 
   onInputEvent(buttonNumber) {
     this.wolf.setPosition(buttonNumber);
@@ -132,6 +161,7 @@ export default class Game {
   animate(timeStamp) {
     this.update(timeStamp);
     this.draw();
+    // this.cartoon();
     requestAnimationFrame((timeStamp) => this.animate(timeStamp));
   }
 }

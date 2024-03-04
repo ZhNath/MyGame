@@ -1,10 +1,15 @@
 export default class Controller {
+  static gameB = false;
+
   static playEggs = [[0, 0]];
   static scoreCounter = 0;
-  static faultTempCounter = 0;
+
   static wolfPoz;
+
+  static faultTempCounter = 0;
+
+  static isFall = false;
   static isBunny;
-  static gameB = false;
   static isStop = [false, false];
 
   static setBunnyStatus(status) {
@@ -60,6 +65,7 @@ export default class Controller {
 
   static update(realTime) {
     //     *****
+
     function pushEggToPlayEggs() {
       let inclusiveIndex = Controller.changeBank();
       Controller.playEggs.push([0, inclusiveIndex]);
@@ -86,6 +92,7 @@ export default class Controller {
       Controller.refreshedTimes++;
 
       // ****************
+
       if (Controller.playEggs.length) {
         if (Controller.playEggs[0][0] === 5) {
           if (Controller.wolfPoz - 1 === Controller.playEggs[0][1]) {
@@ -93,14 +100,15 @@ export default class Controller {
             Controller.scoreCounter++;
             Controller.timeOfStatic -= Controller.timeOfStatic / 200;
           } else {
-            Controller.playEggs.length = 0;
+            Controller.isFall = true;
             Controller.faultTempCounter += Controller.isBunny ? 0.5 : 1;
-            realTime += 1500;
+            Controller.playEggs.length = 0;
+            realTime += 200;
           }
         }
       }
+
       //***************speed
-      console.log(Controller.timeOfStatic);
       if (
         Controller.scoreCounter % 100 === 0 &&
         Controller.scoreCounter !== 0 &&
