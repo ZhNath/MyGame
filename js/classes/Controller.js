@@ -5,7 +5,7 @@ export default class Controller {
   static scoreCounter = 0;
 
   static wolfPoz;
-
+  static lastEggPoz;
   static faultTempCounter = 0;
 
   static isFall = false;
@@ -100,6 +100,7 @@ export default class Controller {
             Controller.scoreCounter++;
             Controller.timeOfStatic -= Controller.timeOfStatic / 200;
           } else {
+            Controller.lastEggPoz = Controller.playEggs[0][1]; //***************** */
             Controller.isFall = true;
             Controller.faultTempCounter += Controller.isBunny ? 0.5 : 1;
             Controller.playEggs.length = 0;

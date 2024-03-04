@@ -35,16 +35,27 @@ export default class FallingEggs {
 
   draw(context) {
     if (Controller.isFall) {
-      context.save();
-      context.scale(-1, 1);
-      context.drawImage(
-        this.faultEggsRight[this.poz][0],
-        this.faultEggsRight[this.poz][1],
-        this.faultEggsRight[this.poz][2],
-        this.faultEggsRight[this.poz][3],
-        15
-      );
-      context.restore();
+      if (Controller.lastEggPoz === 0 || Controller.lastEggPoz === 1) {
+        context.drawImage(
+          this.faultEggsLeft[this.poz][0],
+          this.faultEggsLeft[this.poz][1],
+          this.faultEggsLeft[this.poz][2],
+          this.faultEggsLeft[this.poz][3],
+          15
+        );
+      }
+      if (Controller.lastEggPoz === 2 || Controller.lastEggPoz === 3) {
+        context.save();
+        context.scale(-1, 1);
+        context.drawImage(
+          this.faultEggsRight[this.poz][0],
+          this.faultEggsRight[this.poz][1],
+          this.faultEggsRight[this.poz][2],
+          this.faultEggsRight[this.poz][3],
+          15
+        );
+        context.restore();
+      }
     }
   }
 
@@ -71,14 +82,3 @@ export default class FallingEggs {
     }
   }
 }
-
-// let x2 = -355;
-
-//     context.save();
-//     context.scale(-1, 1);
-//     context.drawImage(this.fall1_shadow, x2 - 13, 280, 30, 15);
-//     context.drawImage(this.fall2_shadow, x2 - 26, 270, 15, 15);
-//     context.drawImage(this.fall3_shadow, x2 - 43, 280, 15, 15);
-//     context.drawImage(this.fall4_shadow, x2 - 63, 280, 15, 15);
-//     context.drawImage(this.fall5_shadow, x2 - 83, 280, 15, 15);
-//     context.restore();
