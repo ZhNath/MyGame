@@ -2,19 +2,31 @@ import Controller from "./Controller.js";
 
 export default class FallingEggs {
   constructor() {
-    this.faultEggs = [
+    this.faultEggsLeft = [
       [new Image(), 230, 280, 30],
       [new Image(), 217, 270, 15],
       [new Image(), 200, 280, 15],
       [new Image(), 180, 280, 15],
       [new Image(), 160, 280, 15],
     ];
+    this.faultEggsLeft[0][0].src = "../../images/1fall.svg";
+    this.faultEggsLeft[1][0].src = "../../images/2fall.svg";
+    this.faultEggsLeft[2][0].src = "../../images/3fall.svg";
+    this.faultEggsLeft[3][0].src = "../../images/4fall.svg";
+    this.faultEggsLeft[4][0].src = "../../images/5fall.svg";
 
-    this.faultEggs[0][0].src = "../../images/1fall.svg";
-    this.faultEggs[1][0].src = "../../images/2fall.svg";
-    this.faultEggs[2][0].src = "../../images/3fall.svg";
-    this.faultEggs[3][0].src = "../../images/4fall.svg";
-    this.faultEggs[4][0].src = "../../images/5fall.svg";
+    this.faultEggsRight = [
+      [new Image(), -368, 280, 30, 15],
+      [new Image(), -381, 270, 15, 15],
+      [new Image(), -398, 280, 15, 15],
+      [new Image(), -418, 280, 15, 15],
+      [new Image(), -438, 280, 15, 15],
+    ];
+    this.faultEggsRight[0][0].src = "../../images/1fall.svg";
+    this.faultEggsRight[1][0].src = "../../images/2fall.svg";
+    this.faultEggsRight[2][0].src = "../../images/3fall.svg";
+    this.faultEggsRight[3][0].src = "../../images/4fall.svg";
+    this.faultEggsRight[4][0].src = "../../images/5fall.svg";
 
     this.pastTime = 0;
 
@@ -23,14 +35,16 @@ export default class FallingEggs {
 
   draw(context) {
     if (Controller.isFall) {
-      console.log("Controller");
+      context.save();
+      context.scale(-1, 1);
       context.drawImage(
-        this.faultEggs[this.poz][0],
-        this.faultEggs[this.poz][1],
-        this.faultEggs[this.poz][2],
-        this.faultEggs[this.poz][3],
+        this.faultEggsRight[this.poz][0],
+        this.faultEggsRight[this.poz][1],
+        this.faultEggsRight[this.poz][2],
+        this.faultEggsRight[this.poz][3],
         15
       );
+      context.restore();
     }
   }
 
@@ -57,3 +71,14 @@ export default class FallingEggs {
     }
   }
 }
+
+// let x2 = -355;
+
+//     context.save();
+//     context.scale(-1, 1);
+//     context.drawImage(this.fall1_shadow, x2 - 13, 280, 30, 15);
+//     context.drawImage(this.fall2_shadow, x2 - 26, 270, 15, 15);
+//     context.drawImage(this.fall3_shadow, x2 - 43, 280, 15, 15);
+//     context.drawImage(this.fall4_shadow, x2 - 63, 280, 15, 15);
+//     context.drawImage(this.fall5_shadow, x2 - 83, 280, 15, 15);
+//     context.restore();
