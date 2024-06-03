@@ -7,7 +7,7 @@ export default class Bunny {
     this.pastTime = 0;
     this.color = Color.screen.shadow;
     this.bunny = new Image();
-    this.link = "../../images/rabbit_shadow.svg";
+    this.link = "../images/rabbit_shadow.svg";
   }
 
   draw(context) {
@@ -17,15 +17,15 @@ export default class Bunny {
 
   update(realTime) {
     let delta = realTime - this.pastTime;
-    if (this.link === "../../images/rabbit_shadow.svg") {
+    if (this.link === "../images/rabbit_shadow.svg") {
       if (delta > 16e3) {
-        this.link = "../../images/rabbit.svg";
+        this.link = "../images/rabbit.svg";
 
         this.pastTime = realTime;
         this.isBunny = true;
       }
     } else if (delta > 8e3) {
-      this.link = "../../images/rabbit_shadow.svg";
+      this.link = "../images/rabbit_shadow.svg";
       this.pastTime = realTime;
       this.isBunny = false;
     }

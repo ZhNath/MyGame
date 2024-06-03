@@ -10,14 +10,14 @@ export default class ShadowLayer {
     this.fall4_shadow = new Image();
     this.fall5_shadow = new Image();
 
-    this.fall1_shadow.src = "../../images/1fall _shadow.svg";
-    this.fall2_shadow.src = "../../images/2fall_shadow.svg";
-    this.fall3_shadow.src = "../../images/3fall_shadow.svg";
-    this.fall4_shadow.src = "../../images/4fall_shadow.svg";
-    this.fall5_shadow.src = "../../images/5fall_shadow.svg";
+    this.fall1_shadow.src = "../images/1fall _shadow.svg";
+    this.fall2_shadow.src = "../images/2fall_shadow.svg";
+    this.fall3_shadow.src = "../images/3fall_shadow.svg";
+    this.fall4_shadow.src = "../images/4fall_shadow.svg";
+    this.fall5_shadow.src = "../images/5fall_shadow.svg";
 
     this.bunny_shadow = new Image();
-    this.bunny_shadow.src = "../../images/rabbit_shadow.svg";
+    this.bunny_shadow.src = "../images/rabbit_shadow.svg";
 
     this.live_shadow = new FaultCounter();
   }

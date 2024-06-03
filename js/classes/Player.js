@@ -16,10 +16,10 @@ export default class Player {
       (this.playerRB = new Image()),
     ];
 
-    this.playerLT.src = "../../images/WolfLT.png";
-    this.playerLB.src = "../../images/WolfLB.png";
-    this.playerRT.src = "../../images/WolfRT.png";
-    this.playerRB.src = "../../images/WolfRB.png";
+    this.playerLT.src = "../images/WolfLT.png";
+    this.playerLB.src = "../images/WolfLB.png";
+    this.playerRT.src = "../images/WolfRT.png";
+    this.playerRB.src = "../images/WolfRB.png";
   }
 
   setPosition(position) {

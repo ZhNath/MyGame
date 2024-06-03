@@ -13,13 +13,13 @@ export default class Glass {
 
     this.chicken = [new Image(), new Image(), new Image(), new Image()];
 
-    this.chicken[0].src = "../../images/chicken1.svg";
-    this.chicken[2].src = "../../images/chicken3.svg";
-    this.chicken[3].src = "../../images/chicken4.svg";
-    this.chicken[1].src = "../../images/chicken2.svg";
+    this.chicken[0].src = "../images/chicken1.svg";
+    this.chicken[2].src = "../images/chicken3.svg";
+    this.chicken[3].src = "../images/chicken4.svg";
+    this.chicken[1].src = "../images/chicken2.svg";
 
     this.grass = new Image();
-    this.grass.src = "../../images/Grass.png";
+    this.grass.src = "../images/Grass.png";
   }
   draw(context) {
     context.shadowColor = "rgba(0, 0, 0, 0.5)";
