@@ -1,5 +1,5 @@
 import Num from "./Numbers.js";
-import Color, { LinearGradient } from "./Color.js";
+import Color from "./Color.js";
 import FaultCounter from "./FaultCounter.js";
 
 export default class ShadowLayer {

@@ -3,7 +3,6 @@ import Drawing, { Bank, Haus } from "./Drawing.js";
 import Settings from "./Settings.js";
 
 import Color from "./Color.js";
-import Num from "./Numbers.js";
 
 export default class Glass {
   constructor(game) {
