@@ -1,6 +1,6 @@
 # Wolf Eierfänger 🎮
 
-![Spiel Vorschau](preview.png)
+![Spiel Vorschau](/preview.png)
 
 ## Beschreibung
 "Wolf Eierfänger" ist ein Browser-Spiel, erstellt mit **React** und **Vite**, unter Verwendung von **ES6+ Klassen** und **Canvas**. Das Spiel ist inspiriert von alten Handheld-Konsolen (wie dem Game Boy), bei dem der Spieler einen Wolf steuert, der fallende Eier fangen muss.
