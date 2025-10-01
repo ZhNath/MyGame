@@ -19,9 +19,4 @@
 ## Preview / Play Online
 [Play the game online](https://my-game-fqafnhybp-nathalys-projects-00e3c987.vercel.app)
 
-## Setup Locally
-```bash
-git clone <your-repo-url>
-cd <your-project-folder>
-npm install
-npm run dev
+
