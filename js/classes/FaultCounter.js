@@ -9,9 +9,9 @@ export default class FaultCounter {
     this.past2Time = 0;
     this.delay;
     this.live = new Image();
-    this.live.src = "../images/live.svg";
+    this.live.src = "/images/live.svg";
     this.live_shadow = new Image();
-    this.live_shadow.src = "../images/live_shadow.svg";
+    this.live_shadow.src = "/images/live_shadow.svg";
   }
   color;
 

@@ -9,11 +9,11 @@ export default class FallingEggs {
       [new Image(), 180, 280, 15],
       [new Image(), 160, 280, 15],
     ];
-    this.faultEggsLeft[0][0].src = "../images/1fall.svg";
-    this.faultEggsLeft[1][0].src = "../images/2fall.svg";
-    this.faultEggsLeft[2][0].src = "../images/3fall.svg";
-    this.faultEggsLeft[3][0].src = "../images/4fall.svg";
-    this.faultEggsLeft[4][0].src = "../images/5fall.svg";
+    this.faultEggsLeft[0][0].src = "/images/1fall.svg";
+    this.faultEggsLeft[1][0].src = "/images/2fall.svg";
+    this.faultEggsLeft[2][0].src = "/images/3fall.svg";
+    this.faultEggsLeft[3][0].src = "/images/4fall.svg";
+    this.faultEggsLeft[4][0].src = "/images/5fall.svg";
 
     this.faultEggsRight = [
       [new Image(), -368, 280, 30, 15],
@@ -22,11 +22,11 @@ export default class FallingEggs {
       [new Image(), -418, 280, 15, 15],
       [new Image(), -438, 280, 15, 15],
     ];
-    this.faultEggsRight[0][0].src = "../images/1fall.svg";
-    this.faultEggsRight[1][0].src = "../images/2fall.svg";
-    this.faultEggsRight[2][0].src = "../images/3fall.svg";
-    this.faultEggsRight[3][0].src = "../images/4fall.svg";
-    this.faultEggsRight[4][0].src = "../images/5fall.svg";
+    this.faultEggsRight[0][0].src = "/images/1fall.svg";
+    this.faultEggsRight[1][0].src = "/images/2fall.svg";
+    this.faultEggsRight[2][0].src = "/images/3fall.svg";
+    this.faultEggsRight[3][0].src = "/images/4fall.svg";
+    this.faultEggsRight[4][0].src = "/images/5fall.svg";
 
     this.pastTime = 0;
 
